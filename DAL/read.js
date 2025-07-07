@@ -2,25 +2,29 @@ import {readFile} from 'node:fs/promises';
 
 
 /**
- * @param {*} path Path to a tet file
- * @returns JavaScript object with file contents
+ * Function to get all data from the database
+ * @param {string} path Path to a tet file
+ * @returns {Promise<object|string>} JavaScript object with file contents,  or an error message in case of failure
  */
 
 export default async function read(path) {
     
     try {
 
-       let dbContents = await readFile(path, 'utf-8');
+       let data = await readFile(path, 'utf-8');
        
-       dbContents = JSON.parse(dbContents);
+       data = JSON.parse(data);
 
-       return dbContents;
+       return data;
     }
       
-    catch (error) { return error.message ; } 
+    catch (error) { return `\n${error.message}\n` } 
 }
 
 
 
 // const path = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/riddles.txt"
+
+
+
 
