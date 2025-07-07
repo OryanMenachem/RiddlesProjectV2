@@ -1,8 +1,7 @@
-import {readFile} from 'node:fs/promises'
+import {readFile} from 'node:fs/promises';
 
 
 /**
- * 
  * @param {*} path Path to a tet file
  * @returns JavaScript object with file contents
  */
@@ -13,12 +12,12 @@ export default async function read(path) {
 
        let dbContents = await readFile(path, 'utf-8');
        
-       dbContents = JSON.parse(dbContents)
+       dbContents = JSON.parse(dbContents);
 
        return dbContents;
     }
       
-    catch (error) { return error.message }
+    catch (error) { return error.message ; } 
 }
 
 
