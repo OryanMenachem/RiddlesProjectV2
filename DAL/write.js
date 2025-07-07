@@ -8,7 +8,7 @@ import {writeFile} from 'node:fs/promises';
  * @returns {Promise<string>} Success or error message accordingly
  */
 
-async function write(path, data) {
+export default async function write(path, data) {
 
     try {
 
