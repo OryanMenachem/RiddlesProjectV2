@@ -3,9 +3,9 @@ import {writeFile} from 'node:fs/promises';
 
 /**
  * Function for recording data in the database
- * @param {*} path Path to a tet file 
+ * @param {string} path Path to a txt file 
  * @param {*} data The data to be written to the database
- * @returns Error and success messages accordingly
+ * @returns {Promise<string>} Success or error message accordingly
  */
 
 async function write(path, data) {
@@ -14,7 +14,7 @@ async function write(path, data) {
 
         await writeFile(path, JSON.stringify(data, null, 2))
 
-        return '\nThe data was successfully added to the database..\n'
+        return '\nThe data was successfully added to the database.\n'
     } 
 
     catch(error) {return `\n${error.message}\n`}
