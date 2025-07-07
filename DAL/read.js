@@ -3,7 +3,7 @@ import {readFile} from 'node:fs/promises';
 
 /**
  * Function to get all data from the database
- * @param {string} path Path to a tet file
+ * @param {string} path Path to a txt file
  * @returns {Promise<object|string>} JavaScript object with file contents,  or an error message in case of failure
  */
 
