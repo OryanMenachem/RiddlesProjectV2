@@ -1,1 +1,24 @@
-[]
+[
+ {
+    "id": 0,
+    "category": "history",
+    "difficulty": "easy",
+    "questionDescription": "In what year did World War II begin?",
+    "correctAnswer": 1939
+
+  },
+  {
+    "id": 1,
+    "category": "geography",
+    "difficulty": "medium",
+    "questionDescription": "What is the capital city of Canada?",
+    "correctAnswer": "Ottawa"
+  },
+  {
+    "id": 2,
+    "category": "science",
+    "difficulty": "hard",
+    "questionDescription": "What is the chemical symbol for water?",
+    "correctAnswer": "H20"
+  }
+]
