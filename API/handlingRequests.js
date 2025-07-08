@@ -1,4 +1,5 @@
 import read from '../DAL/read.js';
+import write from '../DAL/write.js';
 
 
 const path = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/riddles.txt"
@@ -10,7 +11,7 @@ const path = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProject
  */
 
 
-export default async function get(req, res) {
+export async function get(req, res) {
 
     let data = await read(path);
 
@@ -19,3 +20,8 @@ export default async function get(req, res) {
     res.end(data)
 }
 
+export async function post(req, res) {}
+
+export async function put(req, res) {}
+
+export async function del(req, res) {}
