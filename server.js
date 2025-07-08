@@ -1,6 +1,5 @@
 import {createServer} from 'node:http'
-import get from './API/GET.js';
-// import post from './API/POST.js'
+import {get, post, put, del} from './API/handlingRequests.js';
 
 
 
@@ -10,11 +9,11 @@ const router =  {
 
     GET : {'/riddles': get},
 
-    // POST: {'/riddles/addRiddle': post},
+    POST: {'/riddles/addRiddle': post},
 
-    PUT: {},
+    PUT: {'/': put},
 
-    DELETE: {}
+    DELETE: {'/': del}
 }
 
 
