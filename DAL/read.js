@@ -1,4 +1,5 @@
 import {readFile} from 'node:fs/promises';
+import * as colors from '../UI/colors.js'
 
 
 /**
@@ -18,12 +19,12 @@ export default async function read(path) {
        return data;
     }
       
-    catch (error) { return `\n${error.message}\n` } 
+    catch (error) { return colors.error(`\nlocation: DAL/read.js - ${error.message}\n`) } 
 }
 
 
 
-// const path = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/riddles.txt"
+
 
 
 
