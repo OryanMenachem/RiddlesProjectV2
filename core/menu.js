@@ -14,9 +14,7 @@ import * as colors from '../utils/colors.js'
 let flag = true;
 
 export default async function menu() {
-
-    let rightChoice = true;
-
+    
     do {
 
         showMenu();
