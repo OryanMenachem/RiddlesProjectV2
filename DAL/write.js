@@ -1,5 +1,5 @@
 import {writeFile} from 'node:fs/promises';
-import * as colors from '../UI/colors.js'
+import * as colors from '../design/colors.js';
 
 /**
  * Function for recording data in the database
