@@ -4,11 +4,14 @@ import express from 'express';
 const router = express.Router();
 
 
+router.get("riddles")
+
+router.post("riddles")
+
+router.put("riddles/:id")
+
+router.delete("riddles/:id")
+
+
+
  
-"/api/riddles " //  GET
- 
-"/api/riddles " // POST
- 
-"/api/riddles/:id " //PUT
- 
-" /api/riddles/:id " //DELETE
