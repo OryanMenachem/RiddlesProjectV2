@@ -6,8 +6,8 @@ export default  class Player {
 
         this.id = getId();
         this.name = name;
-        this.times = [];        // Array of times per riddle
-        this.totalTime = null;  // Total game time in seconds
+        this.times = [];   // Array of times per riddle
+        this.totalTime = null; // Total game time in seconds
         this.lowestTime = null; // Lowest average game time
     }
 
