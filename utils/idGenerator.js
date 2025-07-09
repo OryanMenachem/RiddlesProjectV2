@@ -10,9 +10,7 @@ import {readFileSync as read, writeFileSync as write} from 'fs';
 
 export default function getId() {
 
-    const path = "../DB/id.txt";
-
-    const id = read(path);
+    const id = read('../DB/id.txt');
     
     const updatedId = {"id": id.id + 1}
 

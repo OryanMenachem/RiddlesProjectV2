@@ -1,5 +1,5 @@
 import {readFile} from 'node:fs/promises';
-import * as colors from '../design/colors.js'
+import * as colors from '../utils/colors.js'
 
 
 /**
