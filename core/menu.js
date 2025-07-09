@@ -1,5 +1,5 @@
 import {input} from '../utils/utils.js'
-import * as colors from '../design/colors.js'
+import * as colors from '../utils/colors.js'
 
 
 /**
@@ -8,19 +8,20 @@ import * as colors from '../design/colors.js'
  * 
  * If the user's choice is valid, the corresponding function
  * is executed.
+ * @async
  */
 
+let flag = true;
+
 export default async function menu() {
-
-    let rightChoice = true;
-
+    
     do {
 
         showMenu();
 
-        rightChoice = await choiceHandling(); 
+        await choiceHandling(); 
     
-    } while (!rightChoice) //Check if the user selection is incorrect.
+    } while (flag) 
 }
 
 
@@ -37,6 +38,7 @@ function showMenu() {
     console.log(colors.cyan('* 4. Update an existing riddle   *'));
     console.log(colors.cyan('* 5. Delete a riddle             *'));
     console.log(colors.cyan('* 6. View leaderboard            *'));
+    console.log(colors.cyan('* 7. Exit                        *'));
     console.log(colors.cyan('**********************************\n'));
 
 }
@@ -45,32 +47,37 @@ function showMenu() {
 
 
 /**
- * Handles the user's selection if it is valid, 
- * and then returns true, otherwise returns false.
- * @returns {Promise<boolean>}
+ * Receives a selection from the user, 
+ * and executes functions accordingly, 
+ * @async
  */
+
 async function choiceHandling() {
 
     const choice = input();
 
     switch (choice) {
         case '1':
-            return true;
+            break;
         case '2':
-            return true;
+            break;
         case '3':
-            return true;
+            break;
         case '4':
-            return true;
+            break;
         case '5':
-            return true;
+            break;
         case '6':
-            return true;
+            break;
+        case '7':
+            console.log('\ngood by :)');
+            flag = false;
+            break;
         default:
             console.log(colors.error('\nOption does not exist!\n'));
-            return false;
+            break;
         }
     }
             
             
-menu();
+// menu();
