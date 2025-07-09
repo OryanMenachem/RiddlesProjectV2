@@ -17,30 +17,35 @@ export default class Riddle {
 
         while (true) {
 
-            console.log(`\nRiddle ${this.id}:`, colors.cyan(this.category), `\n`);
-
-            console.log(`Difficulty Level:`, colors.cyan(this.difficulty), `\n`);
-            
-            console.log(`${this.riddleDescription} \n`);
+            this.toString(); // Riddle description in fine print.
 
             const answer = input();
  
             if (answer == this.correctAnswer) {
 
                 console.log(colors.success(`\ncorrect answer :)\n`));
-                break;
+                return;
             }
 
             console.log(colors.error(`\nwrong answer :(\n`));
         }
     }
+
+    toString() {
+
+            console.log(`\nRiddle id: ${colors.cyan(this.id)} \n`) 
+
+            console.log(`category: ${colors.cyan(this.category)} \n`);
+
+            console.log(`Difficulty Level: ${colors.cyan(this.difficulty)} \n`);
+            
+            console.log(colors.cyan(`${this.riddleDescription}\n`));
+    }
 }
             
 
-   
-            
 
-            
+
         
 
     
