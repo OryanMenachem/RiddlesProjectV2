@@ -19,6 +19,7 @@
   "homepage": "https://github.com/OryanMenachem/RiddlesProjectV2#readme",
   "description": "",
   "dependencies": {
-    "chalk": "^5.4.1"
+    "chalk": "^5.4.1",
+    "readline-sync": "^1.4.10"
   }
 }

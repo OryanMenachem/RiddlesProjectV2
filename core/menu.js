@@ -1,5 +1,27 @@
-import readline from 'readline-sync';
-import * as colors from '../design/colors'
+import {input} from '../utils/utils.js'
+import * as colors from '../design/colors.js'
+
+
+/**
+ * Displays a menu and continues prompting the user
+ * until a valid choice is made.
+ * 
+ * If the user's choice is valid, the corresponding function
+ * is executed.
+ */
+
+export default async function menu() {
+
+    let rightChoice = true;
+
+    do {
+
+        showMenu();
+
+        rightChoice = await choiceHandling(); 
+    
+    } while (!rightChoice) //Check if the user selection is incorrect.
+}
 
 
 
@@ -20,14 +42,16 @@ function showMenu() {
 }
 
 
-function inputChoice() {
-
-    let choice = readline.question('> ');
-    return choice;
-}
 
 
-async function choiceHandling(choice) {
+/**
+ * Handles the user's selection if it is valid, 
+ * and then returns true, otherwise returns false.
+ * @returns {Promise<boolean>}
+ */
+async function choiceHandling() {
+
+    const choice = input();
 
     switch (choice) {
         case '1':
@@ -43,21 +67,10 @@ async function choiceHandling(choice) {
         case '6':
             return true;
         default:
-            console.log('\nOption does not exist!\n');
+            console.log(colors.error('\nOption does not exist!\n'));
             return false;
         }
     }
             
             
-export default function menu() {
-
-    let rightChoice = true;
-
-    do {
-
-        showMenu();
-        let choice = inputChoice();
-        rightChoice = choiceHandling(choice);
-    
-    } while (!rightChoice)
-}
+menu();
