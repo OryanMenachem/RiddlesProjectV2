@@ -5,9 +5,9 @@ import * as colors from '../design/colors.js';
 
 
 /**
- * Displays a sorted leaderboard of players based on their lowest time.
- * Reads player data from a local file, sorts them from fastest to slowest,
- * and prints a formatted leaderboard to the console.
+ 
+ * Shows a leaderboard of players sorted by their fastest time.
+ * Reads players from a file, sorts them, and prints the list to the console.
  * @async
  * @returns {Promise<void>}
  */
