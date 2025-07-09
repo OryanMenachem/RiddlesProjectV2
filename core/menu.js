@@ -1,5 +1,5 @@
 import readline from 'readline-sync';
-import * as colors from './colors'
+import * as colors from '../design/colors'
 
 
 
