@@ -1,23 +1,33 @@
-import getId from '../utils/idGenerator.js'
+import getId from '../../utils/idGenerator.js'
 
 export default  class Player {
 
-    constructor(name, id) {
+    constructor(name) {
 
-        this.id = id;
+        this.id = getId();
         this.name = name;
-        this.times = [];
-        this.lowestTime = null;
+        this.times = [];        // Array of times per riddle
+        this.totalTime = null;  // Total game time in seconds
+        this.lowestTime = null; // Lowest average game time
     }
 
-    static async createPlayer(name) {
-
-        const id = await getId();
-
-        return new Player(name, id);
-    }
+    initializeTotalTime() {this.totalTime = this.times.reduce((total, time) => total += time, 0)}
+   
+    initializeLowestTime() {this.lowestTime = this.times.reduce((total, time) => total += time, 0) / this.times.length}
+    
 }
+        
 
-// const player1 = await Player.create('Oryan');
+
+// const player1 = new Player('Oryan');
+
+
+
+
+
+
+
+
+
 
 
