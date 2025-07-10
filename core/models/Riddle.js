@@ -1,4 +1,4 @@
-import * as colors from '../../design/colors.js'
+import * as colors from '../../utils/colors.js'
 import {input} from '../../utils/utils.js';
 
 export default class Riddle {
@@ -43,7 +43,6 @@ export default class Riddle {
     }
 }
             
-
 
 
         

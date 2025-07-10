@@ -12,9 +12,11 @@ const PORT = 5000;
 
 const server = express();
 
+
 server.use('/players', playersRouter)
 server.use('/riddles', riddlesRouter)
 
+ 
 
 server.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`)
@@ -23,6 +25,6 @@ server.listen(PORT, () => {
 
 
 
-// curl http://localhost:5000/riddles
+// curl http://localhost:5000/riddles/all
 
 // curl -X POST http://localhost:5000 -H "Content-Type: application/json" -d '{"" : "", "": ""}'
