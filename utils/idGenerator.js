@@ -1,4 +1,6 @@
 import {readFileSync as read, writeFileSync as write} from 'fs';
+import { json } from 'stream/consumers';
+
 
 
 /**
@@ -8,13 +10,20 @@ import {readFileSync as read, writeFileSync as write} from 'fs';
  * @returns {number} The previous ID value before incrementing
  */
 
-export default function getId() {
 
-    const id = read('../DB/id.txt');
+export default  function getId() {
+
+    const path = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/id.txt";
+
+    let id = read(path);
+
+    id = JSON.parse(id)
     
-    const updatedId = {"id": id.id + 1}
+    const counter = id.id + 1; 
+       
+    const updatedId = {"id": counter}
 
-    write(path, updatedId)
+    write(path, JSON.stringify(updatedId, null, 2))
 
     return id["id"];
 }
