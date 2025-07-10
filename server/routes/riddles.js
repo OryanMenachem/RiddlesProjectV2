@@ -1,17 +1,23 @@
 import express from 'express'; 
+import { getData, delById } from '../../controllers/riddles.js';
+
+
+
 
 
 const router = express.Router();
 
 
-router.get("riddles")
+router.get("/all", getData)
 
-router.post("riddles")
+router.post("/", (req, res) => {})
 
-router.put("riddles/:id")
+router.put("/:id", (req, res) => {})
 
-router.delete("riddles/:id")
+router.delete("/:id", delById)
+   
 
+export default router;
 
 
  
