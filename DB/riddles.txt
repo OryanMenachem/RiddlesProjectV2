@@ -1,10 +1,10 @@
 [
   {
-    "id": 1,
-    "category": "geography",
-    "difficulty": "medium",
-    "riddleDescription": "What is the capital city of Canada?",
-    "correctAnswer": "Ottawa"
+    "id": 0,
+    "category": "history",
+    "difficulty": "easy",
+    "riddleDescription": "In what year did World War II begin?",
+    "correctAnswer": 1939
   },
   {
     "id": 1,

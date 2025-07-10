@@ -2,6 +2,7 @@ import {input} from '../utils/utils.js'
 import * as colors from '../utils/colors.js'
 import leaderBoard from './leaderBoard.js'
 import sendRequest from '../client/httpRequests.js'
+import createRiddle from '../client/createRiddle.js'
 
 
 let flag = true; // Control flow if the user chooses to exit flag = false
@@ -58,11 +59,16 @@ async function choiceHandling() {
 
     const choice = input();
     let url;
+    let id;
 
     switch (choice) {
         case '1':
             break;
+            
         case '2':
+        const riddle = createRiddle(); 
+        url = `http://localhost:5000/riddles/add`;
+        console.log(await sendRequest(url,'POST', riddle));
             break;
 
         case '3':
@@ -74,11 +80,11 @@ async function choiceHandling() {
             break;
 
         case '5': 
-            const id = input('Enter the riddle id');
+            id = input('Enter the riddle id');
             url = `http://localhost:5000/riddles/${id}`;
             console.log(await sendRequest(url,'DELETE'));
             break; 
-            
+
         case '6':
             await leaderBoard();
             break;
@@ -93,3 +99,6 @@ async function choiceHandling() {
     }
             
             
+
+
+
