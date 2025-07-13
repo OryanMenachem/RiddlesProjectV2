@@ -1,6 +1,8 @@
 import express from 'express'; 
-import { getAllRiddles,  addRiddle, update, delRiddleById} from '../controllers/riddles.js';
-
+import get from '../CRUD/read.js';
+import post from '../CRUD/create.js';
+import update  from '../CRUD/update.js';
+import del from '../CRUD/delete.js'
 
 
 
@@ -8,13 +10,13 @@ import { getAllRiddles,  addRiddle, update, delRiddleById} from '../controllers/
 const router = express.Router();
 
 
-router.get("/all", getAllRiddles)
+router.get("/all", get)
 
-router.post("/add", addRiddle)
+router.post("/add", post)
 
 router.put("/:id", update)
 
-router.delete("/:id", delRiddleById)
+router.delete("/:id", del)
    
 
 export default router;

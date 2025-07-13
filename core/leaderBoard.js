@@ -1,6 +1,6 @@
 import read from '../DAL/read.js';
-import * as colors from '../utils/colors.js';
-
+import * as colors from "../utilsF/colors.js";
+import { paths } from "../utilsF/utils.js";
 
 
 
@@ -14,7 +14,7 @@ import * as colors from '../utils/colors.js';
 
 export default async function  displayLeaderBoard() {
 
-    const path = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/players.txt"
+    const path = paths.players;
 
     let players = await read(path);
     

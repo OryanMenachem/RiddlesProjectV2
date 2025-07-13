@@ -24,9 +24,9 @@ export default async function sendHttpRequest(url, method, body = null) {
 
         headers: {'Content-Type': 'application/json'},
 
-        body: JSON.stringify(body)
+      });
 
-    });
+      if (method != "GET") {response[body] = JSON.stringify(body)}
 
     if (!response.ok) {
 
@@ -35,7 +35,7 @@ export default async function sendHttpRequest(url, method, body = null) {
 
     const msg = await response.json();
     
-    return JSON.stringify(msg, null, 2);
+    return msg;
 
     } catch(err) { return JSON.stringify({error : err.message}, null, 2) }
 }
