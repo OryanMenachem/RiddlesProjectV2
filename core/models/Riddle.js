@@ -1,5 +1,5 @@
-import * as colors from '../../utils/colors.js'
-import {input} from '../../utils/utils.js';
+import * as colors from "../../utilsF/colors.js"
+import {input} from "../../utilsF/utils.js";
 
 export default class Riddle {
 
@@ -17,21 +17,17 @@ export default class Riddle {
 
         while (true) {
 
-            this.toString(); // Riddle description in fine print.
+            this.displayRiddle(); // Riddle description in fine print.
 
             const answer = input();
  
-            if (answer == this.correctAnswer) {
-
-                console.log(colors.success(`\ncorrect answer :)\n`));
-                return;
-            }
+            if (answer == this.correctAnswer) { console.log(colors.success(`\ncorrect answer :)\n`)); return;}
 
             console.log(colors.error(`\nwrong answer :(\n`));
         }
     }
 
-    toString() {
+    displayRiddle() {
 
             console.log(`\nRiddle id: ${colors.cyan(this.id)} \n`) 
 
@@ -42,7 +38,8 @@ export default class Riddle {
             console.log(colors.cyan(`${this.riddleDescription}\n`));
     }
 }
-            
+
+
 
 
         
