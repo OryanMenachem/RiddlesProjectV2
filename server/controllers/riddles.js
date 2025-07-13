@@ -19,7 +19,7 @@ export async function getAllRiddles(req, res) {
                  
             res.send(JSON.stringify(data, null, 2))
 
-            } catch(err) {res.send(err)}
+            } catch(err) {res.send({error : err.message})}
 }
 
 
@@ -42,7 +42,7 @@ export async function addRiddle(req, res) {
 
       res.send({ msg : "success" })
 
-      } catch(err) {res.send({msg : err})}
+      } catch(err) {res.send({error : err.message})}
 }
 
 /**
@@ -63,13 +63,13 @@ export async function update(req, res) {
 
       const index = data.findIndex(obj => obj.id === updatedRiddle.id);
      
-      Object.assign(data[index], updatedRiddle);     //for(const key in data[index]) { data[index][key] = updatedRiddle[key]}
+      data[index] = updatedRiddle;    //Object.assign(data[index], updatedRiddle);     
 
       await write(riddlesPath, data)
 
       res.send({ msg : "The riddle was successfully updated." })
 
-      }catch(err) {res.send({msg : err})}
+      } catch(err) {res.send({error : err.message})}
 
 
 }
@@ -98,5 +98,5 @@ export async function delRiddleById(req, res) {
 
       res.send({msg : "The riddle was successfully deleted"})
 
-      } catch(err) {res.send({msg : err})}
+      } catch(err) {res.send({error : err.message})}
 }

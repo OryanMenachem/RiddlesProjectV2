@@ -1,19 +1,20 @@
 import fetch from 'node-fetch';
 
+
 /**
- * Sends an HTTP request with the given method, URL, and optional body.
- *
- * @param {string} url - The address to send the request to.
- * @param {string} method - The HTTP method to use (like 'GET', 'POST', etc.).
- * @param {Object} [body] - The data to send with the request (for POST, PUT, etc.).
- *
- * @returns {Promise<string>} A formatted JSON string from the server's response.
- *
- * This function automatically sets the 'Content-Type' to 'application/json'
- * and converts the request body to JSON. It also parses the JSON response.
+ * Sends an HTTP request with the given method, URL, and optional JSON body.
+ * 
+ * Automatically sets 'Content-Type' to 'application/json'.
+ * Throws an error if the server response is not OK (status 4xx or 5xx).
+ * 
+ * @async
+ * @param {string} url - The URL to send the request to.
+ * @param {string} method - HTTP method (e.g., 'GET', 'POST').
+ * @param {Object} [body=null] - Optional data to send as JSON.
+ * @returns {Promise<string>} JSON-formatted response or error message.
  */
 
-export default async function sendHttpRequest(url, method, body) {
+export default async function sendHttpRequest(url, method, body = null) {
 
     try { 
 
@@ -27,9 +28,15 @@ export default async function sendHttpRequest(url, method, body) {
 
     });
 
-    
-    return JSON.stringify(await response.json(), null, 2);
+    if (!response.ok) {
 
-    } catch(err) {return err}
+      throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
+    }
+
+    const msg = await response.json();
+    
+    return JSON.stringify(msg, null, 2);
+
+    } catch(err) { return JSON.stringify({error : err.message}, null, 2) }
 }
 
