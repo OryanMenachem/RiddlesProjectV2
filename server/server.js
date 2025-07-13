@@ -24,7 +24,3 @@ server.listen(PORT, () => {
     
 
 
-
-// curl http://localhost:5000/riddles/all
-
-// curl -X POST http://localhost:5000 -H "Content-Type: application/json" -d '{"" : "", "": ""}'

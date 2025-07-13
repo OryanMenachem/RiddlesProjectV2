@@ -1,7 +1,7 @@
 import {input} from '../utils/utils.js'
 import getId from "../utils/idGenerator.js";
 
-export default function createRiddle() {
+export function createRiddle() {
 
     const riddle =   {
 
@@ -15,6 +15,28 @@ export default function createRiddle() {
   return riddle
 }
 
+
+export function updateRiddle(riddle) {
+
+  let choice;
+
+  for(const key in riddle) {
+
+    if (key == "id") {continue;}
+
+    while (true) {
+
+    choice = input(`Would you like to change the '${key}' field? (y/n)`)  
+    if (choice == 'y') {riddle[key] = input('Update this field'); break;}
+    else if (choice == 'n') {break;}
+
+    }
+
+  }
+  
+
+  return riddle
+}
 
 
 

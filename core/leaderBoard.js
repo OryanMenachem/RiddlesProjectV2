@@ -18,22 +18,27 @@ export default async function  displayLeaderBoard() {
 
     let players = await read(path);
     
-    players =  players.slice().sort((player1, player2) => player1.lowestTime - player2.lowestTime);
+    players.sort((player1, player2) => player1.lowestTime - player2.lowestTime);
 
-    console.log(colors.cyan("\n**************************"));
-    console.log(            "       Leader board        ");
-    console.log(colors.cyan("**************************"));
+    console.log(colors.cyan("\n************************"));
+    console.log(            "      Leader board        ");
+    console.log(colors.cyan("************************"));
 
     players.forEach((player, i) => {
 
-        console.log(`${colors.cyan(i + 1)}. ${player.name}    ${colors.cyan(`-`)}  ${player.lowestTime} seconds\n`);
+        const rank = colors.cyan(i + 1)
+        const name = player.name.padEnd(8);
+        const sec = player.lowestTime;
+        const space = colors.cyan('-'.padEnd(4))
+
+        console.log(`${rank}. ${name} ${space} ${sec} sec\n`);
     })
     
-    console.log(colors.cyan("**************************\n"));
+    console.log(colors.cyan("************************\n"));
 }
         
        
-    
+ displayLeaderBoard();   
     
     
  

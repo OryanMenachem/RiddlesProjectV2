@@ -1,5 +1,5 @@
 import express from 'express'; 
-import { getAllRiddles,  addRiddle, updateRiddle, delRiddleById} from '../controllers/riddles.js';
+import { getAllRiddles,  addRiddle, update, delRiddleById} from '../controllers/riddles.js';
 
 
 
@@ -12,7 +12,7 @@ router.get("/all", getAllRiddles)
 
 router.post("/add", addRiddle)
 
-router.put("/:id", updateRiddle)
+router.put("/:id", update)
 
 router.delete("/:id", delRiddleById)
    
