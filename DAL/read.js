@@ -1,5 +1,5 @@
 import {readFile} from 'node:fs/promises';
-import * as colors from '../utils/colors.js'
+import * as colors from '../utilsF/colors.js'
 
 /**
  * Reads JSON data from a file and optionally returns one object by its ID.

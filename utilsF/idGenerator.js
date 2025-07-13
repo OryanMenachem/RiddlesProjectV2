@@ -1,5 +1,6 @@
 import {readFileSync as read, writeFileSync as write} from 'fs';
-import { json } from 'stream/consumers';
+// import { json } from 'stream/consumers';
+import { paths } from './utils.js';
 
 
 
@@ -13,9 +14,7 @@ import { json } from 'stream/consumers';
 
 export default  function getId() {
 
-    const path = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/id.txt";
-
-    let id = read(path);
+    let id = read(paths.id);
 
     id = JSON.parse(id)
     
@@ -23,7 +22,7 @@ export default  function getId() {
        
     const updatedId = {"id": counter}
 
-    write(path, JSON.stringify(updatedId, null, 2))
+    write(paths.id, JSON.stringify(updatedId, null, 2))
 
     return id["id"];
 }

@@ -1,5 +1,5 @@
-import {input} from '../utils/utils.js'
-import * as colors from '../utils/colors.js'
+import {input} from "../utilsF/utils.js"
+import * as colors from "../utilsF/colors.js"
 import leaderBoard from './leaderBoard.js'
 import sendRequest from '../client/httpRequests.js'
 import {createRiddle} from '../server/CRUD/create.js'

@@ -1,14 +1,13 @@
 import express from 'express';
 import read from '../../DAL/read.js'
-
-const path = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/players.txt"
+import { paths } from "../../utilsF/utils.js";
 
 const router = express.Router();
 
 
 router.get("/all", async (req, res) => {
 
-    const data = await read(path)
+    const data = await read(paths.players)
     
     res.send(JSON.stringify(data, null, 2))
 })
