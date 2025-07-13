@@ -3,19 +3,28 @@ import * as colors from '../utils/colors.js'
 
 
 /**
- * Function to get all data from the database
+ * Reads and parses JSON data from a file. Optionally returns a specific object by ID.
+ * 
  * @async
- * @param {string} path Path to a txt file
- * @returns {Promise<object|string>} JavaScript object with file contents,  or an error message in case of failure
+ * @param {string} path - Path to the JSON text file.
+ * @param {number|null} [id=null] - Optional ID to find a specific object.
+ * @returns {Promise<Object|Object[]|string>} The full data array, a specific object if ID is given, or an error message.
  */
 
-export default async function read(path) {
+export default async function read(path, id = null) {
     
     try {
 
        let data = await readFile(path, 'utf-8');
        
        data = JSON.parse(data);
+
+       if (id) {
+          
+          data = data.filter((obj) => obj.id == id)[0]
+
+          if (!data) {return colors.error("No object with such ID was found")}
+       }
 
        return data;
     }
