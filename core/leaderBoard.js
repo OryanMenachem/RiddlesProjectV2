@@ -14,9 +14,7 @@ import { paths } from "../utilsF/utils.js";
 
 export default async function  displayLeaderBoard() {
 
-    const path = paths.players;
-
-    let players = await read(path);
+    let players = await read(paths.players);
     
     players.sort((player1, player2) => player1.lowestTime - player2.lowestTime);
 
@@ -38,7 +36,7 @@ export default async function  displayLeaderBoard() {
 }
         
        
-//  displayLeaderBoard();   
+
     
     
  

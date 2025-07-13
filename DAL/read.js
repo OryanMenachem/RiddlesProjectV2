@@ -2,7 +2,7 @@ import {readFile} from 'node:fs/promises';
 import * as colors from '../utilsF/colors.js'
 
 /**
- * Reads JSON data from a file and optionally returns one object by its ID.
+ * Reads JSON data from a txt file and optionally returns one object by its ID.
  *
  * @async
  * @param {string} path - The file path to read from.
@@ -11,7 +11,7 @@ import * as colors from '../utilsF/colors.js'
  */
 
 
-const path = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/riddles.txt";
+
 export default async function read(path, id = null) {
     
     try {
@@ -36,11 +36,11 @@ export default async function read(path, id = null) {
        return data;
     }
       
-    catch (error) { return colors.error(`\nERROR!! \nlocation: DAL/read.js  \ndetails: ${error.message}\n`) } 
+    catch (error) { return colors.error(`\nERROR \nlocation: DAL/read.js.  \ndetails: ${error.message}\n`) } 
 }
 
 
-console.log(await read(path, 0))
+
 
 
 

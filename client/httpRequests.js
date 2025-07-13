@@ -26,17 +26,16 @@ export default async function sendHttpRequest(url, method, body = null) {
 
       });
 
-      if (method != "GET") {response[body] = JSON.stringify(body)}
+    if (method != "GET") {response[body] = JSON.stringify(body)}
 
     if (!response.ok) {
 
       throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
     }
 
-    const msg = await response.json();
     
-    return msg;
+    return await response.json();
 
-    } catch(err) { return JSON.stringify({error : err.message}, null, 2) }
+    } catch(err) { return colors.error(`\nERROR \nlocation: client/httpRequests.js.  \ndetails: ${err.message}\n`) }
 }
 

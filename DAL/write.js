@@ -17,7 +17,7 @@ export default async function write(path, data) {
         return colors.success('\nThe data was successfully added to the database.\n')
     } 
 
-    catch(error) {return colors.error(`\nlocation: DAL/write.js - ${error.message}\n`)}
+    catch(error) {return colors.error(`\nERROR \nlocation: DAL/write.js.  \n${error.message}\n`)}
 
 } 
 
