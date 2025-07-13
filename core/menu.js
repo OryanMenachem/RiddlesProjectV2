@@ -2,7 +2,7 @@ import {input} from '../utils/utils.js'
 import * as colors from '../utils/colors.js'
 import leaderBoard from './leaderBoard.js'
 import sendRequest from '../client/httpRequests.js'
-import {createRiddle} from '../client/updateAndCreate.js'
+import {createRiddle, updateRiddle} from '../client/updateAndCreate.js'
 
 
 let flag = true; // Control flow if the user chooses to exit flag = false
@@ -77,8 +77,9 @@ async function choiceHandling() {
 
         case '4':
             id = input('Enter the riddle id');
+            const updatedRiddle = await updateRiddle(id)    
             url = `http://localhost:5000/riddles/${id}`;
-            console.log(await sendRequest(url,'PUT'));
+            console.log(await sendRequest(url,'PUT',updatedRiddle));
             break;
 
         case '5': 
