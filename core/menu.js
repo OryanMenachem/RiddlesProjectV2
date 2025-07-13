@@ -2,7 +2,9 @@ import {input} from '../utils/utils.js'
 import * as colors from '../utils/colors.js'
 import leaderBoard from './leaderBoard.js'
 import sendRequest from '../client/httpRequests.js'
-import {createRiddle, updateRiddle} from '../client/updateAndCreate.js'
+import {createRiddle} from '../server/CRUD/create.js'
+import {updateRiddle} from '../server/CRUD/update.js'
+
 
 
 let flag = true; // Control flow if the user chooses to exit flag = false

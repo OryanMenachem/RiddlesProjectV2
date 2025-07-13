@@ -1,14 +1,13 @@
 import {readFile} from 'node:fs/promises';
 import * as colors from '../utils/colors.js'
 
-
 /**
- * Reads and parses JSON data from a file. Optionally returns a specific object by ID.
- * 
+ * Reads JSON data from a file and optionally returns one object by its ID.
+ *
  * @async
- * @param {string} path - Path to the JSON text file.
- * @param {number|null} [id=null] - Optional ID to find a specific object.
- * @returns {Promise<Object|Object[]|string>} The full data array, a specific object if ID is given, or an error message.
+ * @param {string} path - The file path to read from.
+ * @param {number|null} [id=null] - Optional ID to find a specific object in the data.
+ * @returns {Promise<Object|Object[]|undefined>} The whole data array, a single object if ID is given and found, or undefined if not found.
  */
 
 export default async function read(path, id = null) {
@@ -21,10 +20,11 @@ export default async function read(path, id = null) {
 
        if (id) {
           
-          data = data.filter((obj) => obj.id == id)[0]
+          data = data.filter((obj) => obj.id == id)[0];
 
-          if (!data) {return colors.error("No object with such ID was found")}
-       }
+          if (!data) { console.log(colors.error("\nNo object with such ID was found\n")); return;}
+
+         }
 
        return data;
     }
