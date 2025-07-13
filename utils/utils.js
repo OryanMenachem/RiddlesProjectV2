@@ -28,3 +28,6 @@ export function input(message) {
     
     
 
+export const idPath = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/id.txt";
+export const riddlesPath = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/riddles.txt";
+export const playersPath = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/players.txt";

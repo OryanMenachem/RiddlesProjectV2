@@ -1,5 +1,9 @@
 import {input} from '../utils/utils.js'
 import getId from "../utils/idGenerator.js";
+import * as colors from '../utils/colors.js'
+import read from '../DAL/read.js'
+
+const path = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/riddles.txt"
 
 export function createRiddle() {
 
@@ -15,8 +19,19 @@ export function createRiddle() {
   return riddle
 }
 
+/**
+ * @async
+ * @param {*} id 
+ * @returns 
+ */
+export async function updateRiddle(id) {
 
-export function updateRiddle(riddle) {
+  const data = await read(path)
+
+  const riddle =  data.filter((obj) => obj.id == id)[0]
+
+    
+  if (!riddle) {return JSON.stringify({msg: colors.error("No riddle with such ID was found")}, null, 2)}
 
   let choice;
 
@@ -27,15 +42,19 @@ export function updateRiddle(riddle) {
     while (true) {
 
     choice = input(`Would you like to change the '${key}' field? (y/n)`)  
+
     if (choice == 'y') {riddle[key] = input('Update this field'); break;}
+
     else if (choice == 'n') {break;}
+
+    console.log(colors.error("\nYour selection is invalid.\n"));
+    
 
     }
 
   }
-  
 
-  return riddle
+  return riddle;
 }
 
 

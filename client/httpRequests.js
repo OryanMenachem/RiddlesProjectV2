@@ -27,7 +27,8 @@ export default async function sendHttpRequest(url, method, body) {
 
     });
 
-    return JSON.stringify(await response.json(), null, 2)
+    
+    return JSON.stringify(await response.json(), null, 2);
 
     } catch(err) {return err}
 }
