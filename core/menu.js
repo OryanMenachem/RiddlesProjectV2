@@ -2,7 +2,7 @@ import {input} from '../utils/utils.js'
 import * as colors from '../utils/colors.js'
 import leaderBoard from './leaderBoard.js'
 import sendRequest from '../client/httpRequests.js'
-import createRiddle from '../client/createRiddle.js'
+import {createRiddle} from '../client/updateAndCreate.js'
 
 
 let flag = true; // Control flow if the user chooses to exit flag = false
@@ -18,20 +18,19 @@ let flag = true; // Control flow if the user chooses to exit flag = false
 
 export default async function menu() {
     
-    do {
+    while(flag) {
 
         showMenu();
 
         await choiceHandling(); 
     
-    } while (flag) 
+    } 
 }
 
 
 
 function showMenu() {
 
-    
     console.log('\nChoose one of the following options: \n');
     
     console.log(`${colors.cyan('**************')} MENU ${colors.cyan('**************')}`);
@@ -77,6 +76,9 @@ async function choiceHandling() {
             break;
 
         case '4':
+            id = input('Enter the riddle id');
+            url = `http://localhost:5000/riddles/${id}`;
+            console.log(await sendRequest(url,'PUT'));
             break;
 
         case '5': 
@@ -88,10 +90,12 @@ async function choiceHandling() {
         case '6':
             await leaderBoard();
             break;
+
         case '7':
             console.log('\ngood by :)');
             flag = false;
             break;
+
         default:
             console.log(colors.error('\nOption does not exist!'));
             break;

@@ -1,5 +1,6 @@
 import read from '../../DAL/read.js';
 import write from '../../DAL/write.js';
+import { updateRiddle } from '../../client/updateAndCreate.js';
 
 const path = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/riddles.txt"
 
@@ -31,7 +32,28 @@ export async function addRiddle(req, res) {
 }
 
 
-export async function updateRiddle(req, res) {}
+export async function update(req, res) {
+
+      const id = parseInt(req.params.id);
+
+      const data = await read(path)
+
+      const oldRiddle =  data.filter((obj, i) => obj.id == id)[0]
+      
+      if (!oldRiddle) {res.send({msg: "No ridlle with such ID was found"})}
+
+      const index = data.findIndex(obj => obj.id === 2);
+
+      
+      const newRiddle = updateRiddle(oldRiddle)
+
+      data[index] = newRiddle;
+
+      await write(path, data)
+
+      res.send({ msg : "The riddle was successfully updated." })
+
+}
 
 
 
