@@ -8,9 +8,16 @@
   },
   {
     "id": 2,
-    "category": "science",
-    "difficulty": "hard",
+    "category": "a",
+    "difficulty": "a",
     "riddleDescription": "What is the chemical symbol for water?",
     "correctAnswer": "H20"
+  },
+  {
+    "id": 10,
+    "category": "a",
+    "difficulty": "a",
+    "riddleDescription": "a",
+    "correctAnswer": "a"
   }
 ]
