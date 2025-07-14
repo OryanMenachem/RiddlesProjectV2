@@ -14,7 +14,7 @@ import fetch from 'node-fetch';
  * @returns {Promise<string>} JSON-formatted response or error message.
  */
 
-export default async function sendHttpRequest(url, method, body = null) {
+export default async function sendHttpRequest(url, method, data = null) {
 
     try { 
 
@@ -24,9 +24,11 @@ export default async function sendHttpRequest(url, method, body = null) {
 
         headers: {'Content-Type': 'application/json'},
 
+        body: data != null ? JSON.stringify(data) : null
+
       });
 
-    if (method != "GET") {response[body] = JSON.stringify(body)}
+   
 
     if (!response.ok) {
 
@@ -36,6 +38,6 @@ export default async function sendHttpRequest(url, method, body = null) {
     
     return await response.json();
 
-    } catch(err) { return colors.error(`\nERROR \nlocation: client/httpRequests.js.  \ndetails: ${err.message}\n`) }
+    } catch(err) { return `\nERROR \nlocation: client/httpRequests.js.  \ndetails: ${err.message}\n`}
 }
 
