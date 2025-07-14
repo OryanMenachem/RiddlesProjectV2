@@ -49,7 +49,6 @@ function showMenu() {
 
 
 
-
 /**
  * Receives a selection from the user, 
  * and executes functions accordingly, 
@@ -59,35 +58,30 @@ function showMenu() {
 async function choiceHandling() {
 
     const choice = input();
-    let url;
-    let id;
-
+    let result;
+    
     switch (choice) {
         case '1':
             break;
             
         case '2':
-        const riddle = createRiddle(); 
-        url = `http://localhost:5000/riddles/add`;
-        console.log(await sendRequest(url,'POST', riddle));
+            result = await handleCreate();
+            console.log(result)          
             break;
 
         case '3':
-            url = `http://localhost:5000/riddles/all`;
-            console.log(await sendRequest(url))
+            result = await handleRead();    
+            console.log(result)   
             break;
 
         case '4':
-            id = input('Enter the riddle id');
-            const updatedRiddle = await updateRiddle(id)    
-            url = `http://localhost:5000/riddles/${id}`;
-            console.log(await sendRequest(url,'PUT',updatedRiddle));
+            result = await handleUpdate();
+            console.log(result)   
             break;
 
         case '5': 
-            id = input('Enter the riddle id');
-            url = `http://localhost:5000/riddles/${id}`;
-            console.log(await sendRequest(url,'DELETE'));
+            result = await handleDelete();
+            console.log(result)   
             break; 
 
         case '6':
@@ -109,3 +103,44 @@ async function choiceHandling() {
 
 
 
+
+const handleCreate = async () => {
+
+    const riddle = createRiddle(); 
+    const url = `http://localhost:5000/riddles/add`;
+    const method = 'POST';
+    const response = await sendRequest(url, method , riddle);
+
+    return JSON.stringify(response, null, 2)
+} 
+
+const handleRead = async () => {
+
+    const url = `http://localhost:5000/riddles/all`;
+    const method = 'GET';
+    const response = await sendRequest(url, method)
+
+    return JSON.stringify(response, null, 2)
+}    
+
+const handleUpdate = async () => {
+
+    const id = input('Enter the riddle id');
+    const updatedRiddle = await updateRiddle(id)    
+    const url = `http://localhost:5000/riddles/${id}`;
+    const method = 'PUT';
+    const response = await sendRequest(url, method ,updatedRiddle)
+
+    return JSON.stringify(response, null, 2)
+}    
+
+const handleDelete = async () => {
+
+    const id = input('Enter the riddle id');
+    const url = `http://localhost:5000/riddles/${id}`;
+    const method = 'DELETE';
+    const response = await sendRequest(url, method);
+    
+    return JSON.stringify(response, null, 2);
+
+}       
