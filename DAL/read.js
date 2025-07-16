@@ -1,5 +1,5 @@
-import {readFile} from 'node:fs/promises';
-import * as colors from '../utilsF/colors.js'
+import {readFile} from "node:fs/promises";
+import {colors} from "../utils/generalUtils.js";
 
 /**
  * Reads JSON data from a txt file and optionally returns one object by its ID.

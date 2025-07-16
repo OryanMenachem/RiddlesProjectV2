@@ -1,9 +1,8 @@
-import {input} from "../utilsF/utils.js"
-import * as colors from "../utilsF/colors.js"
+import {input, colors, paths} from "../utils/generalUtils.js"
 import leaderBoard from './leaderBoard.js'
-import sendRequest from '../client/httpRequests.js'
-import {createRiddle} from '../server/CRUD/create.js'
-import {updateRiddle} from '../server/CRUD/update.js'
+import sendRequest from '../client/httpRequests.js';
+import {createRiddle} from '../client/CRUD/create.js';  
+import {updateObject} from '../client/CRUD/update.js';
 
 
 
@@ -20,13 +19,7 @@ let flag = true; // Control flow if the user chooses to exit flag = false
 
 export default async function menu() {
     
-    while(flag) {
-
-        showMenu();
-
-        await choiceHandling(); 
-    
-    } 
+    while(flag) { showMenu(); await choiceHandling(); } 
 }
 
 
@@ -59,7 +52,7 @@ async function choiceHandling() {
 
     const choice = input();
     let result;
-    
+
     switch (choice) {
         case '1':
             break;
@@ -126,7 +119,7 @@ const handleRead = async () => {
 const handleUpdate = async () => {
 
     const id = input('Enter the riddle id');
-    const updatedRiddle = await updateRiddle(id)    
+    const updatedRiddle = await updateObject(paths.riddles, id)    
     const url = `http://localhost:5000/riddles/${id}`;
     const method = 'PUT';
     const response = await sendRequest(url, method ,updatedRiddle)

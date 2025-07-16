@@ -1,4 +1,4 @@
-import * as colors from '../utilsF/colors.js'
+import {colors} from "../utils/generalUtils.js" 
 
 
 

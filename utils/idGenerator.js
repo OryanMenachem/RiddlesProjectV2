@@ -1,6 +1,5 @@
 import {readFileSync as read, writeFileSync as write} from 'fs';
-// import { json } from 'stream/consumers';
-import { paths } from './utils.js';
+import { paths } from './generalUtils.js';
 
 
 
@@ -14,6 +13,8 @@ import { paths } from './utils.js';
 
 export default  function getId() {
 
+    try {
+
     let id = read(paths.id);
 
     id = JSON.parse(id)
@@ -25,9 +26,9 @@ export default  function getId() {
     write(paths.id, JSON.stringify(updatedId, null, 2))
 
     return id["id"];
+
+    } catch(err) {console.log(err.message)}
 }
-
-
 
 
 

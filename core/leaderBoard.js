@@ -1,6 +1,5 @@
-import read from '../DAL/read.js';
-import * as colors from "../utilsF/colors.js";
-import { paths } from "../utilsF/utils.js";
+import read from "../DAL/read.js";
+import { paths, colors } from "../utils/generalUtils.js";
 
 
 

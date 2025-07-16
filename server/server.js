@@ -1,11 +1,11 @@
-import express from 'express';
-import playersRouter from './routes/players.js'
-import riddlesRouter from './routes/riddles.js'
+import "dotenv/config";
+import express from "express";
+import playersRouter from "./routers/playersRouter.js"
+import riddlesRouter from "./routers/riddlesRouter.js"
 
 
 
 
-const PORT = 5000;
 
 
 const server = express();
@@ -17,9 +17,14 @@ server.use('/riddles', riddlesRouter)
 
  
 
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}...`)
-})
+function startListening() {
+
+    try {server.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}...`)) }
+
+    catch(err) {console.log(`Listening error \n${err.message}`)}
+}
+
+startListening();
     
 
 

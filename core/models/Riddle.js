@@ -1,5 +1,4 @@
-import * as colors from "../../utilsF/colors.js"
-import {input} from "../../utilsF/utils.js";
+import {input, colors} from "../../utils/generalUtils.js";
 
 export default class Riddle {
 
@@ -30,14 +29,14 @@ export default class Riddle {
     displayRiddle() {
 
             console.log(`\nRiddle id: ${colors.cyan(this.id)} \n`) 
-
             console.log(`category: ${colors.cyan(this.category)} \n`);
-
             console.log(`Difficulty Level: ${colors.cyan(this.difficulty)} \n`);
-            
             console.log(colors.cyan(`${this.riddleDescription}\n`));
     }
 }
+
+
+            
 
 
 
