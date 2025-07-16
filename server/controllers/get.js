@@ -1,4 +1,4 @@
-import { paths } from '../../utilsF/utils.js'
+import { paths } from '../../utils/generalUtils.js'
 import read from "../../DAL/read.js"
 
 
@@ -14,14 +14,14 @@ export default async function get(req, res) {
       try {
 
             const primaryRouting = req.originalUrl.split('/')[1];
-        
+
             const path = paths[primaryRouting];
-          
+
             const data = await read(path)
-                 
+
             res.send(JSON.stringify(data, null, 2))
 
-            } catch(err) {res.send({error : err.message})}
+      } catch (err) { res.send({ error: err.message }) }
 }
 
 

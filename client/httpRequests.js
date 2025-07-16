@@ -21,23 +21,23 @@ export default async function sendHttpRequest(url, method, data = null) {
     let response = await fetch(url, {
                 
         method: method,
-
         headers: {'Content-Type': 'application/json'},
-
         body: data != null ? JSON.stringify(data) : null
 
       });
 
-   
-
-    if (!response.ok) {
-
-      throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
-    }
-
-    
-    return await response.json();
-
+      if (!response.ok) {
+  
+        throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
+      }
+  
+      return await response.json();
+      
     } catch(err) { return `\nERROR \nlocation: client/httpRequests.js.  \ndetails: ${err.message}\n`}
 }
+  
+
+
+   
+
 

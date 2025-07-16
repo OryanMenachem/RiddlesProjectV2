@@ -1,4 +1,4 @@
-import getId from "../../utilsF/idGenerator.js"
+import getId from "../../utils/idGenerator.js"
 
 export default  class Player {
 

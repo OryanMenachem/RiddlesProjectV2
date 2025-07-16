@@ -5,19 +5,5 @@
     "difficulty": "medium",
     "riddleDescription": "What is the capital city of Canada?",
     "correctAnswer": "Ottawa"
-  },
-  {
-    "id": 2,
-    "category": "a",
-    "difficulty": "a",
-    "riddleDescription": "What is the chemical symbol for water?",
-    "correctAnswer": "H20"
-  },
-  {
-    "id": 10,
-    "category": "a",
-    "difficulty": "a",
-    "riddleDescription": "a",
-    "correctAnswer": "a"
   }
 ]
