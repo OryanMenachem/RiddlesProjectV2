@@ -10,7 +10,7 @@ import fetch from 'node-fetch';
  * @async
  * @param {string} url - The URL to send the request to.
  * @param {string} method - HTTP method (e.g., 'GET', 'POST').
- * @param {Object} [body=null] - Optional data to send as JSON.
+ * @param {Object} [data=null] - Optional data to send as JSON.
  * @returns {Promise<string>} JSON-formatted response or error message.
  */
 

@@ -36,7 +36,7 @@ export default async function read(path, id = null) {
        return data;
     }
       
-    catch (error) { return colors.error(`\nERROR \nlocation: DAL/read.js.  \ndetails: ${error.message}\n`) } 
+    catch (error) { return  {error : error.message}} 
 }
 
 
