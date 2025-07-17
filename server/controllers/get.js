@@ -17,8 +17,8 @@ export default async function get(req, res) {
 
             const path = paths[primaryRouting];
 
-            const data = await read(path)
-
+            const data = await read(path);
+            
             res.send(JSON.stringify(data, null, 2))
 
       } catch (err) { res.send({ error: err.message }) }

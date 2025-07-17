@@ -19,7 +19,11 @@ let flag = true; // Control flow if the user chooses to exit flag = false
 
 export default async function menu() {
     
-    while(flag) { showMenu(); await choiceHandling(); } 
+    while(flag) { 
+        showMenu(); 
+        await choiceHandling(); 
+        input("To return to the menu, press any key...")
+    } 
 }
 
 
@@ -90,6 +94,8 @@ async function choiceHandling() {
             console.log(colors.error('\nOption does not exist!'));
             break;
         }
+
+
     }
             
             
