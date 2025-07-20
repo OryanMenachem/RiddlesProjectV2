@@ -4,9 +4,9 @@ import chalk from 'chalk';
 
 
 export const paths = {
-    id : "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/id.txt",
+    id : "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/files/id.txt",
     riddles : "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/riddles.txt",
-    players : "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/players.txt"
+    players : "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/files/players.txt"
 }
 
 
@@ -32,7 +32,7 @@ export function input(message) {
 
     while(true) {
 
-        userInput = readline.question(colors.cyan('> '));
+        userInput = readline.question(colors.cyan('> ')).trim();
         console.log();
         if (userInput) {return userInput}
         console.log(colors.error('\nNo input was entered!\n'));

@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "app": "clear && node client/app.js",      
-    "server": "clear && node --watch server/server.js" 
+    "app": "clear && node --watch client/app.js",
+    "server": "clear && node --watch server/server.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "chalk": "^5.4.1",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
+    "mongodb": "^6.17.0",
     "node-fetch": "^3.3.2",
     "readline-sync": "^1.4.10"
   }

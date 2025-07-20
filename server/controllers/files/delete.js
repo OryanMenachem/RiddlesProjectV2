@@ -1,6 +1,6 @@
-import read from "../../DAL/read.js";
-import write from "../../DAL/write.js";
-import { paths } from "../../utils/generalUtils.js";
+import read from "../../../DAL/files/read.js";
+import write from "../../../DAL/files/write.js";
+import { paths } from "../../../utils/generalUtils.js";
 
 /**
  * Deletes a riddle by its ID, which is received from the request URL.

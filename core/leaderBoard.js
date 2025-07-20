@@ -1,4 +1,4 @@
-import read from "../DAL/read.js";
+import read from "../DAL/files/read.js";
 import { paths, colors } from "../utils/generalUtils.js";
 
 

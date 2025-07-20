@@ -1,8 +1,7 @@
 import express from 'express'; 
-import getAllRiddles from '../controllers/get.js';
-import addRiddle from '../controllers/add.js';
-import updateRiddle  from '../controllers/update.js';
-import delRiddle from '../controllers/delete.js'
+// import updateRiddle  from '../controllers/files/update.js';
+import {getAllRiddles, getRiddleById, addRiddle, deleteRiddle, updateRiddle} from "../controllers/ridlles_controlers.js"
+
 
 
 
@@ -12,11 +11,14 @@ const router = express.Router();
 
 router.get("/all", getAllRiddles)
 
+router.get("/:id", getRiddleById)
+
 router.post("/add", addRiddle)
 
 router.put("/:id", updateRiddle)
 
-router.delete("/:id", delRiddle)
+router.delete("/:id", deleteRiddle)
+
    
 
 export default router;

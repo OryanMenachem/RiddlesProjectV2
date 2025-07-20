@@ -1,4 +1,3 @@
-import read from "../../DAL/read.js";
 import { input, colors } from "../../utils/generalUtils.js";
 
 
@@ -16,26 +15,20 @@ import { input, colors } from "../../utils/generalUtils.js";
  * or an error message if something went wrong.
  */
 
-export async function updateObject(path, id) {
+export async function updateRiddle(riddle) {
   
-  let object;
+  for(const key in riddle) {
 
-  try {
-    object = await read(path, id)
-  } catch(error){return error.message}
-
-  if (!object) {return "No object with such ID was found."}
-
-  for(const key in object) {
-
-    if (key == "id") {continue;}
+    if (key == "_id") {delete riddle[key]; continue;}
+    else if (key == "id") {delete riddle[key]; continue;}
 
     const choice = askYesNo(`Would you like to change the '${key}' field? (y/n)`)  
-    if (choice) {object[key] = input('Update this field')}
+    if (choice) {riddle[key] = input('Update this field')}
+    else  {delete riddle[key];}
 
   }
-
-  return object;
+  
+  return riddle;
 }
   
 
@@ -51,9 +44,10 @@ export async function updateObject(path, id) {
  * @returns {Promise<boolean>} Returns true if the user answers 'y', false if 'n'.
  */
 
-async function askYesNo(message) {
+
+function askYesNo(message) {
   while (true) {
-    const answer = input(message).trim().toLowerCase();
+    const answer = input(message);
 
     if (answer === "y") return true;
     if (answer === "n") return false;

@@ -1,8 +1,8 @@
 import {input, colors, paths} from "../utils/generalUtils.js"
 import leaderBoard from './leaderBoard.js'
 import sendRequest from '../client/httpRequests.js';
-import {createRiddle} from '../client/CRUD/create.js';  
-import {updateObject} from '../client/CRUD/update.js';
+import {createRiddle} from '../core/CRUD/create.js';  
+import {updateRiddle} from '../core/CRUD/update.js';
 
 
 
@@ -19,11 +19,7 @@ let flag = true; // Control flow if the user chooses to exit flag = false
 
 export default async function menu() {
     
-    while(flag) { 
-        showMenu(); 
-        await choiceHandling(); 
-        input("To return to the menu, press any key...")
-    } 
+    while(flag) { showMenu(); await choiceHandling(); } 
 }
 
 
@@ -118,18 +114,22 @@ const handleRead = async () => {
     const url = `http://localhost:5000/riddles/all`;
     const method = 'GET';
     const response = await sendRequest(url, method)
-
+    
     return JSON.stringify(response, null, 2)
 }    
 
 const handleUpdate = async () => {
 
     const id = input('Enter the riddle id');
-    const updatedRiddle = await updateObject(paths.riddles, id)    
-    const url = `http://localhost:5000/riddles/${id}`;
-    const method = 'PUT';
-    const response = await sendRequest(url, method ,updatedRiddle)
+    let url = `http://localhost:5000/riddles/${id}`;
+    let method = 'GET';
+    let riddle = await sendRequest(url, method)    
 
+    riddle = await updateRiddle(riddle);
+    url = `http://localhost:5000/riddles/${id}`;
+    method = 'PUT';
+    const response = await sendRequest(url, method, riddle)
+   
     return JSON.stringify(response, null, 2)
 }    
 

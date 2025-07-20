@@ -20,6 +20,7 @@ export function createRiddle() {
         riddleDescription : input('Enter the description of the riddle'),
         correctAnswer : input('Enter the correct answer to the riddle')
   }
+
   
   return riddle
 }
