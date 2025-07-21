@@ -16,7 +16,7 @@ import {riddlesCollection} from "../../DB/mongo_connection.js";
 
 export async function insertRiddleToMongo(riddle) {
   try {
-    console.log(riddle);
+    // console.log(riddle);
     
     const result = await riddlesCollection.insertOne(riddle);
 

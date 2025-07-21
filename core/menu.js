@@ -1,12 +1,9 @@
 import {input, colors, paths} from "../utils/generalUtils.js"
-import leaderBoard from './leaderBoard.js'
-import sendRequest from '../client/httpRequests.js';
-import {createRiddle} from '../core/CRUD/create.js';  
-import {updateRiddle} from '../core/CRUD/update.js';
+import {handleMenu} from "./services.js"
 
 
-
-let flag = true; // Control flow if the user chooses to exit flag = false
+// Control flow if the user chooses to exit flag = false
+let flag = true; 
 
 /**
  * Displays a menu and continues prompting the user
@@ -19,7 +16,12 @@ let flag = true; // Control flow if the user chooses to exit flag = false
 
 export default async function menu() {
     
-    while(flag) { showMenu(); await choiceHandling(); } 
+    while(flag) { 
+
+        showMenu(); 
+        let choice = input();
+        await handleChoice(choice); 
+    } 
 }
 
 
@@ -48,98 +50,41 @@ function showMenu() {
  * @async
  */
 
-async function choiceHandling() {
-
-    const choice = input();
+async function handleChoice(choice) {
+   
     let result;
 
     switch (choice) {
+
         case '1':
             break;
-            
         case '2':
-            result = await handleCreate();
-            console.log(result)          
+            result = await handleMenu.create();      
             break;
-
         case '3':
-            result = await handleRead();    
-            console.log(result)   
+            result = await handleMenu.read();     
             break;
-
         case '4':
-            result = await handleUpdate();
-            console.log(result)   
+            result = await handleMenu.update(); 
             break;
-
         case '5': 
-            result = await handleDelete();
-            console.log(result)   
+            result = await handleMenu.delete();
             break; 
-
         case '6':
-            await leaderBoard();
-            break;
-
+            await handleMenu.leaderBoard();
+            return;
         case '7':
             console.log('\ngood by :)');
             flag = false;
-            break;
-
+            return;
         default:
             console.log(colors.error('\nOption does not exist!'));
-            break;
+            return;
         }
-
-
+        console.log(result);
     }
             
             
 
 
 
-
-const handleCreate = async () => {
-
-    const riddle = createRiddle(); 
-    const url = `http://localhost:5000/riddles/add`;
-    const method = 'POST';
-    const response = await sendRequest(url, method , riddle);
-
-    return JSON.stringify(response, null, 2)
-} 
-
-const handleRead = async () => {
-
-    const url = `http://localhost:5000/riddles/all`;
-    const method = 'GET';
-    const response = await sendRequest(url, method)
-    
-    return JSON.stringify(response, null, 2)
-}    
-
-const handleUpdate = async () => {
-
-    const id = input('Enter the riddle id');
-    let url = `http://localhost:5000/riddles/${id}`;
-    let method = 'GET';
-    let riddle = await sendRequest(url, method)    
-
-    riddle = await updateRiddle(riddle);
-    url = `http://localhost:5000/riddles/${id}`;
-    method = 'PUT';
-    const response = await sendRequest(url, method, riddle)
-   
-    return JSON.stringify(response, null, 2)
-}    
-
-const handleDelete = async () => {
-
-    const id = input('Enter the riddle id');
-    const url = `http://localhost:5000/riddles/${id}`;
-    const method = 'DELETE';
-    const response = await sendRequest(url, method);
-    
-    return JSON.stringify(response, null, 2);
-
-}       
