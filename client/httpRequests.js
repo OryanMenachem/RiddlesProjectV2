@@ -19,10 +19,10 @@ export default async function sendHttpRequest(url, method, data = null) {
     try { 
 
         let options  = {
+          method: method,
+          headers: {'Content-Type': 'application/json'},
+        };
                 
-        method: method,
-        headers: {'Content-Type': 'application/json'},
-      };
      
 
       if (method != "GET" && data != null ) {options ["body"] = JSON.stringify(data) }
