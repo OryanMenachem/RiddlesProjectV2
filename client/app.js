@@ -1,13 +1,15 @@
-import * as message from '../core/generalMessage.js';
+import {message} from '../core/generalMessage.js';
 import menu from '../core/menu.js'
-import { startConection } from '../DB/mongo_connection.js';
+import { mongoConnection } from '../DB/mongo.js';
 
-await startConection();
+
+
+await mongoConnection.open();
 
 message.sayWelcome();
 
 message.displayInstructions();
 
-menu();
+await menu();
 
 

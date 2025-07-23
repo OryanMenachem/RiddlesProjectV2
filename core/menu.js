@@ -1,5 +1,6 @@
 import {input, colors, paths} from "../utils/generalUtils.js"
-import {handleMenu} from "./services.js"
+import {handleMenu} from "./menu_services.js"
+
 
 
 // Control flow if the user chooses to exit flag = false
@@ -21,6 +22,7 @@ export default async function menu() {
         showMenu(); 
         let choice = input();
         await handleChoice(choice); 
+        
     } 
 }
 

@@ -4,7 +4,7 @@ import "dotenv/config";
 
 const client = new MongoClient(process.env.MONGO_URI);
 
-export async function startConection() {
+async function openConection() {
 
     try {
         await client.connect();
@@ -18,7 +18,7 @@ export async function startConection() {
 /**
  * Closes the MongoDB connection.
  */
-export async function closeConnection() {
+async function closeConnection() {
   try {
     await client.close();
     console.log('MongoDB connection closed');
@@ -27,7 +27,11 @@ export async function closeConnection() {
   }
 }
 
+export const mongoConnection = {
 
+  open : openConection,
+  close : closeConnection
+}
 
 export const db = client.db('riddles_game');
 

@@ -1,37 +1,52 @@
-import {readAllRiddles, readRiddleById} from "../../DAL/riddles/read.js";
-import {insertRiddleToMongo } from "../../DAL/riddles/write.js";
-import {deleteRiddleById} from "../../DAL/riddles/delete.js";
-import {updateRiddleById} from "../../DAL/riddles/update.js"
+import crudOperations from "../../DAL/riddles_dal.js";
+import {Response} from "../../utils/generalUtils.js";
 
 
 export async function getAllRiddles(req, res) {
 
+    let response = new Response();
     try {
-    const riddles = await readAllRiddles();
-    res.send(riddles);
-    return;
+    response = await crudOperations.readAllRiddles();
 
-    }catch(error) {res.send(error.message); return}
+    if (response.error) {throw new Error(response.message)}
+
+    return res.send(response.content);
+
+    } catch(error) {
+        response.message = error.message;
+        return res.send(response.message); 
+    }
 }
 
 
 
 export async function getRiddleById(req, res) {
+    
+    let response = new Response();
 
     const id = req.params.id;
-    try {
-    const riddle = await readRiddleById(id);
-    res.send(riddle);
-    return;
 
-    }catch(error) {res.send(error.message); return}
+    try {
+    response = await crudOperations.readRiddleById(id);
+
+    if (response.error) {throw new Error(response.message)}
+
+    return res.send(response.content);
+
+    } catch(error) { 
+        response.message = error.message;
+        return res.send(response.message);
+    }
 }
 
-export async function addRiddle(req, res) {
 
+
+
+export async function addRiddle(req, res) {
+    
     try {
     const riddle = req.body;
-    const result = await insertRiddleToMongo(riddle);
+    const result = await crudOperations.addRiddle(riddle);
     res.send(result);
     return;
 
@@ -45,7 +60,7 @@ export async function updateRiddle(req, res){
     const updatedRiddle = req.body;
     
     try {
-        const result = await updateRiddleById(id, updatedRiddle)
+        const result = await crudOperations.updateRiddleById(id, updatedRiddle)
         res.send(result)
         return;
     } catch(error) {
@@ -61,7 +76,7 @@ export async function deleteRiddle(req, res) {
     const id = parseInt(req.params.id);
     
     try {
-        const result =  await deleteRiddleById(id)
+        const result =  await crudOperations.deleteRiddleById(id)
         res.send(result)
         return;
 

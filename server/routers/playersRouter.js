@@ -1,19 +1,18 @@
 import express from 'express';
-import read from '../../DAL/files/read.js'
-import { paths } from "../../utils/generalUtils.js";
+
 
 const router = express.Router();
 
 
-router.get("/all", async (req, res) => {
+router.get("/playername", async (req, res) => {});
 
-    const data = await read(paths.players)
-    
-    res.send(JSON.stringify(data, null, 2))
-})
+router.get("/leaderboard", async (req, res) => {})
 
-router.post("/", (req, res) => {})
+router.post("/submit-score ", (req, res) => {})
 
-router.put("/:id", (req, res) => {})
+router.post("/:id", (req, res) => {})
  
 export default router;
+
+
+

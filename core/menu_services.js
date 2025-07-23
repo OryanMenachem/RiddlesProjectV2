@@ -1,18 +1,18 @@
-import {createRiddle} from "./CRUD/create.js";
-import {updateRiddle} from "./CRUD/update.js";
+import {createRiddle} from "./CRUD/riddles.js";
+import {updateRiddle} from "./CRUD/riddles.js";
 import sendHttpRequest from "../client/httpRequests.js";
 import { input } from "../utils/generalUtils.js";
-import leaderBoard from './leaderBoard.js';
+// import leaderBoard from './leaderBoard.js';
 
 
 
 const handleCreate = async () => {
 
-    const riddle = createRiddle(); 
+    const riddle = createRiddle();
     const url = `http://localhost:5000/riddles/add`;
     const method = 'POST';
     const response = await sendHttpRequest(url, method , riddle);
-
+    
     return JSON.stringify(response, null, 2)
 } 
 
@@ -31,7 +31,10 @@ const handleUpdate = async () => {
     let url = `http://localhost:5000/riddles/${id}`;
     let method = 'GET';
     let riddle = await sendHttpRequest(url, method)    
-
+    console.log(riddle);
+    
+    if (riddle.error) {return JSON.stringify(riddle.error, null, 2)}
+    
     riddle = await updateRiddle(riddle);
     url = `http://localhost:5000/riddles/${id}`;
     method = 'PUT';
@@ -55,6 +58,5 @@ export const handleMenu = {
     create : handleCreate,
     read : handleRead,
     update : handleUpdate,
-    delete : handleDelete,
-    leaderBoard : leaderBoard
+    delete : handleDelete
 }
