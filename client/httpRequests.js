@@ -47,7 +47,7 @@ export default async function sendHttpRequest(url, method, data = null) {
       if (method != "GET" && data != null ) {options.body = JSON.stringify(data) }
 
       await new Promise(res => setTimeout(res, 2000));
-
+      
       let response = await fetch(url, options);
 
       if (!response.ok) {

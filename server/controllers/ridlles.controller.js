@@ -1,4 +1,4 @@
-import crudOperations from "../../DAL/riddles_dal.js";
+import crudOperations from "../../DAL/riddles.dal.js";
 import {Response} from "../../utils/generalUtils.js";
 
 
