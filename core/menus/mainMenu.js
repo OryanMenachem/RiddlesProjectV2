@@ -1,5 +1,5 @@
-import {input, colors, paths} from "../utils/generalUtils.js"
-import {handleMenu} from "./menu_services.js"
+import {input, colors} from "../../utils/generalUtils.js"
+import {handleMenu} from "./mainMenu_services.js"
 
 
 
@@ -19,7 +19,7 @@ export default async function menu() {
     
     while(flag) { 
 
-        showMenu(); 
+        showMainMenu(); 
         let choice = input();
         await handleChoice(choice); 
         
@@ -28,7 +28,7 @@ export default async function menu() {
 
 
 
-function showMenu() {
+function showMainMenu() {
 
     console.log('\nChoose one of the following options: \n');
     

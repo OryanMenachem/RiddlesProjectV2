@@ -1,6 +1,5 @@
 import express from 'express'; 
-// import updateRiddle  from '../controllers/files/update.js';
-import {getAllRiddles, getRiddleById, addRiddle, deleteRiddle, updateRiddle} from "../controllers/ridlles_controlers.js"
+import {getAllRiddles, getRiddleById, addRiddle, deleteRiddle, updateRiddle} from "../controllers/ridlles.controller.js";
 
 
 

@@ -4,13 +4,6 @@ import chalk from 'chalk';
 
 
 
-export const paths = {
-    id : "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/files/id.txt",
-    riddles : "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/riddles.txt",
-    players : "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/files/players.txt"
-}
-
-
 export const colors = {
     cyan : chalk.cyan,
     error : chalk.red,

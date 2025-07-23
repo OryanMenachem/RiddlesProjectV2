@@ -1,8 +1,8 @@
-import {createRiddle} from "./CRUD/riddles.js";
-import {updateRiddle} from "./CRUD/riddles.js";
-import sendHttpRequest from "../client/httpRequests.js";
-import { input } from "../utils/generalUtils.js";
-// import leaderBoard from './leaderBoard.js';
+import {createRiddle} from "../CRUD/riddles.js";
+import {updateRiddle} from "../CRUD/riddles.js";
+import sendHttpRequest from "../../client/httpRequests.js";
+import { input } from "../../utils/generalUtils.js";
+
 
 
 

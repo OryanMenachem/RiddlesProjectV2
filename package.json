@@ -21,6 +21,7 @@
   "homepage": "https://github.com/OryanMenachem/RiddlesProjectV2#readme",
   "description": "",
   "dependencies": {
+    "@supabase/supabase-js": "^2.52.0",
     "chalk": "^5.4.1",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
