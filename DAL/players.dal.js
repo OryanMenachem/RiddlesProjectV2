@@ -1,7 +1,7 @@
 import supabase from "../DB/supabase.js";
 import { Response } from "../utils/generalUtils.js";
 
-export async function addPlayerToDB(table, player) {
+async function addPlayer(table, player) {
   
   let response = new Response();
 
@@ -23,7 +23,7 @@ export async function addPlayerToDB(table, player) {
 }
 
 
-export async function getPlayerById(table ,id) {
+async function getPlayerById(table ,id) {
      
      let response = new Response();
      const {data, error} = await supabase.from(table)
@@ -37,14 +37,14 @@ export async function getPlayerById(table ,id) {
       response.error = true;
     }
     else {
-    response.message = "The player was successfully read";
+    response.message = "The player was successfully retrieved";
     response.content = data;
     }
 
     return response;
 }
 
-export async function getAllPlayers(table) {
+async function getAllPlayers(table) {
      
      let response = new Response();
      const {data, error} = await supabase.from(table)
@@ -55,7 +55,7 @@ export async function getAllPlayers(table) {
       response.error = true;
     }
     else {
-    response.message = "The players was successfully read";
+    response.message = "The players was successfully retrieved";
     response.content = data;
     }
 
@@ -63,3 +63,35 @@ export async function getAllPlayers(table) {
 }
     
     
+async function best_timeUpdate(table, id, best_time) {
+  
+    let response = new Response();
+    const updatedTime = { "best_time" : best_time };
+    const { data, error } = await supabase
+      .from(table)
+      .update(updatedTime)
+      .eq("id", id)
+      .select()
+      .single();
+
+    if (error) {
+      response.message = error.message;
+      response.error = true;
+    }
+
+    else {
+      response.message =  "best_time updated successfully";
+      response.content =  data;
+    };
+    return response;
+
+  } 
+
+const crudOperations = {
+      addPlayer : addPlayer,
+      getPlayerById : getPlayerById,
+      getAllPlayers : getAllPlayers,
+      best_timeUpdate : best_timeUpdate
+}
+
+export default crudOperations;
