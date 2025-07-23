@@ -23,15 +23,24 @@ export async function addPlayerToDB(table, player) {
 }
 
 
-// export async function readByUsername(table ,username) {
+export async function getRiddleById(table ,id) {
+     
+     let response = new Response();
+     const {data, error} = await supabase.from(table)
+    .select()
+    .eq('id', id)
+    .single();
+    
+  
+    if (error) {
+      response.message = error.message;
+      response.error = true;
+    }
+    else {
+    response.message = "The player was successfully read";
+    response.content = data;
+    }
 
-//      const {data, error} = await supabase.from(table)
-//     .select()
-//     .eq('username',username)
-//     .single();
-
-//     if (error) {throw new Error(error.message)}
-
-//     return data
-// }
+    return response;
+}
     

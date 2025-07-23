@@ -18,7 +18,9 @@ export default async function gameFlow(player) {
 
     message.displaySuccessMessage();
     player.init_best_time();
-    player.showStat();   
+    player.showStat();
+    
+    return player;   
 }
 
 
