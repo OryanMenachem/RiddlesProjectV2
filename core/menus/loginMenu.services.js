@@ -33,7 +33,6 @@ export async function handleLogin()  {
     const url = `http://localhost:5000/players/${id}`;
     const method = 'GET';
     response = await sendHttpRequest(url, method);
-    console.log(response);/////
     return response;
 
 }

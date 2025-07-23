@@ -1,5 +1,6 @@
 import {input, colors} from "../../utils/generalUtils.js"
-import {riddlesCrud} from "./gameMenu.services.js"
+import {riddlesCrud, displayLeaderBoard} from "./gameMenu.services.js"
+import "dotenv/config"
 
 
 
@@ -71,8 +72,9 @@ async function handleChoice(choice) {
             result = await riddlesCrud.delete();
             break; 
         case '6':
-            await riddlesCrud.leaderBoard();
-            return;
+            const leaderBoard = await riddlesCrud.leaderBoard();
+            displayLeaderBoard(leaderBoard);
+            return true;
         case '7':
             console.log('\ngood by :)');
             return false;
@@ -84,8 +86,10 @@ async function handleChoice(choice) {
         return true;
     }
             
-            
 
+
+            
+gameMenu();
 
 // [
 //   // Easy
