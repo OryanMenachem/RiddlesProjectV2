@@ -2,7 +2,7 @@ import {createRiddle} from "../CRUD/riddles.js";
 import {updateRiddle} from "../CRUD/riddles.js";
 import sendHttpRequest from "../../client/httpRequests.js";
 import { input, colors } from "../../utils/generalUtils.js";
-// import { getLeaderBoard } from "../../server/controllers/players.controller.js";
+
 
 
 
@@ -48,8 +48,7 @@ async function sendDeleteRiddleRequest() {
     const id = input('Enter the riddle id');
     const url = `http://localhost:5000/riddles/${id}`;
     const method = 'DELETE';
-    const response = await sendHttpRequest(url, method);
-    
+    const response = await sendHttpRequest(url, method);  
     return response
 
 }
