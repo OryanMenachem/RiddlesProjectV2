@@ -1,5 +1,5 @@
 import {message} from '../core/generalMessage.js';
-import mainMenu from '../core/menus/mainMenu.js'
+import loginMenu from '../core/menus/loginMenu.js';
 import { mongoConnection } from '../DB/mongo.js';
 
 
@@ -10,6 +10,6 @@ message.sayWelcome();
 
 message.displayInstructions();
 
-await mainMenu();
+await loginMenu();
 
 

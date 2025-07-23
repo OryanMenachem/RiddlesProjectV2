@@ -6,57 +6,56 @@ import { input } from "../../utils/generalUtils.js";
 
 
 
-const handleCreate = async () => {
+async function sendCreateRiddleRequest() {
 
     const riddle = createRiddle();
     const url = `http://localhost:5000/riddles/add`;
     const method = 'POST';
     const response = await sendHttpRequest(url, method , riddle);
     
-    return JSON.stringify(response, null, 2)
+    return response
 } 
 
-const handleRead = async () => {
+export async function sendReadAllRiddlesRequest()  {
 
     const url = `http://localhost:5000/riddles/all`;
     const method = 'GET';
     const response = await sendHttpRequest(url, method)
     
-    return JSON.stringify(response, null, 2)
+    return response
 }    
 
-const handleUpdate = async () => {
+async function sendUpdateRiddleRequest() {
 
     const id = input('Enter the riddle id');
     let url = `http://localhost:5000/riddles/${id}`;
     let method = 'GET';
     let riddle = await sendHttpRequest(url, method)    
-    console.log(riddle);
     
-    if (riddle.error) {return JSON.stringify(riddle.error, null, 2)}
+    if (riddle.error) {return riddle.error}
     
     riddle = await updateRiddle(riddle);
     url = `http://localhost:5000/riddles/${id}`;
     method = 'PUT';
     const response = await sendHttpRequest(url, method, riddle)
    
-    return JSON.stringify(response, null, 2)
+    return response
 }    
 
-const handleDelete = async () => {
+async function sendDeleteRiddleRequest() {
 
     const id = input('Enter the riddle id');
     const url = `http://localhost:5000/riddles/${id}`;
     const method = 'DELETE';
     const response = await sendHttpRequest(url, method);
     
-    return JSON.stringify(response, null, 2);
+    return response
 
 }
 
-export const handleMenu = {
-    create : handleCreate,
-    read : handleRead,
-    update : handleUpdate,
-    delete : handleDelete
+export const riddlesCrud = {
+    create : sendCreateRiddleRequest,
+    read : sendReadAllRiddlesRequest,
+    update : sendUpdateRiddleRequest,
+    delete : sendDeleteRiddleRequest
 }

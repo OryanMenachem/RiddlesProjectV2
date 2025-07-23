@@ -1,31 +1,35 @@
-import readlineSync from 'readline-sync';
+import { input, colors, timeDecorator } from "../utils/generalUtils.js";
+import {sendReadAllRiddlesRequest} from "../core/menus/gameMenu.services.js";
+import Riddle from "./models/Riddle.js";
+import {message} from "./generalMessage.js";
 
-export function showMenu() {
-  console.log('\nPlease choose one of the following options:');
-  console.log('1. Play as Guest');
-  console.log('2. Register');
-  console.log('3. Login');
+export default async function gameFlow(player) {
+
+  const difficultyLevel = inputDifficultyLevel();
+  let riddles = await sendReadAllRiddlesRequest();
+  riddles = riddles.filter((riddle) => riddle.difficulty == difficultyLevel)
+
+  
+  for (let riddle of riddles) {
+      riddle = new Riddle(riddle);
+      let time = timeDecorator(() => riddle.ask())
+      player.times.push(time);
+   } 
+
+    message.displaySuccessMessage();
+    player.init_best_time();
+    player.showStat();   
 }
 
-// Function 2: Handle the user's choice
-export function handleMenuChoice() {
-  const choice = readlineSync.question('\nEnter your choice number: ');
 
-  switch (choice) {
-    case '1':
-      console.log('\nYou chose to play as a guest.');
-      return 'guest';
-    case '2':
-      console.log('\nYou chose to register.');
-      return 'register';
-    case '3':
-      console.log('\nYou chose to login.');
-      return 'login';
-    default:
-      console.log('\nInvalid choice. Please try again.');
-      showMenu();
-      return handleMenuChoice(); // Recursive call for retry
+function inputDifficultyLevel() {
+
+  while(true) {
+
+    const levels = ["easy", "medium", "hard"];
+    let difficultyLevel = input("Choose difficulty level: easy/medium/hard");
+    if (levels.includes(difficultyLevel.toLowerCase())) {return difficultyLevel}
+    console.log(colors.error('\nInvalid choice!'));
+
   }
 }
-
-
