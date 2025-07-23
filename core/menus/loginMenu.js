@@ -1,13 +1,13 @@
 import {input, colors} from "../../utils/generalUtils.js";
-import {handleRegister, handleGuest} from "../menus/loginMenu.services.js"
-import gameFlow from "../gameFlow.js";
+import {handleRegister, handleGuest, handleLogin} from "../menus/loginMenu.services.js"
+
 
 
 
 
 export default async function loginMenu() {
     let flag = true;
-    while(flag) { 
+    while(true) { 
         showLoginMenu(); 
         let choice = input();
         flag = await handleLoginMenuChoice(choice); // flag => Control flow if the user chooses to exit flag = false       
@@ -29,27 +29,28 @@ function showLoginMenu() {
 
 
 export async function handleLoginMenuChoice(choice) {
+
   let result;
+
   switch (choice) {
     case '1':
       await handleGuest();
-      break;
+      return true;
     case '2':
+      result = await handleRegister();
       break;
     case '3':
-      result = await handleRegister();
-      console.log(JSON.stringify(result, null, 2));
+      result = await handleLogin();
       break;
     case '4':
     console.log("good bye :)");
       return false;
     default:
       console.log(colors.error('\nInvalid choice!'));
-      break;
+      return true;
   }
-
-
   
+  console.log(JSON.stringify(result, null, 2));
   return true;
 }
       
