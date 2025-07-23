@@ -23,7 +23,7 @@ export async function addPlayerToDB(table, player) {
 }
 
 
-export async function getRiddleById(table ,id) {
+export async function getPlayerById(table ,id) {
      
      let response = new Response();
      const {data, error} = await supabase.from(table)
@@ -43,4 +43,23 @@ export async function getRiddleById(table ,id) {
 
     return response;
 }
+
+export async function getAllPlayers(table) {
+     
+     let response = new Response();
+     const {data, error} = await supabase.from(table)
+    .select()
+    
+    if (error) {
+      response.message = error.message;
+      response.error = true;
+    }
+    else {
+    response.message = "The players was successfully read";
+    response.content = data;
+    }
+
+    return response;
+}
+    
     

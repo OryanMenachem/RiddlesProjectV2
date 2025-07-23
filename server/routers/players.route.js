@@ -1,13 +1,13 @@
 import express from "express";
-import {addPlayer, getPlayer} from "../controllers/players.controller.js";
+import {addPlayer, getPlayer, getLeaderBoard} from "../controllers/players.controller.js";
 
 
 const router = express.Router();
 
 
-router.get("/:id", getPlayer);
+router.get("/leaderboard", getLeaderBoard)
 
-router.get("/leaderboard", (req, res) => {})
+router.get("/:id", getPlayer);
 
 router.post("/submit-score ", (req, res) => {})
 
