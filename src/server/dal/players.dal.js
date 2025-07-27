@@ -5,9 +5,8 @@ import { Response } from '../utils/generalUtils.js';
 const PLAYERS_TABLE = "players";
 
 export async function addPlayer(name, hashedPassword, role = 'player') {
-  
-  let response = new Response();
 
+  let response = new Response();
   const { data, error } = await supabase
     .from(PLAYERS_TABLE)
     .insert({
@@ -18,6 +17,7 @@ export async function addPlayer(name, hashedPassword, role = 'player') {
     .select()
     .single(); 
 
+    
   if (error) {  
     response.message = error.message;
     response.error = true;
