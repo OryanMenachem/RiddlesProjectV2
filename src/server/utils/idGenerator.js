@@ -10,7 +10,7 @@ import { readFileSync as read, writeFileSync as write } from 'fs';
 
 export default  function getId() {
 
-    const path = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/DB/id.txt"; 
+    const path = "C:/Users/om316/OneDrive/Desktop/JavaScript/Projects/RiddlesProjectV2/src/server/db/id.txt"; 
     try {
     let id = read(path);
     id = JSON.parse(id)
