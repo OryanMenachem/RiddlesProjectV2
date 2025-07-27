@@ -4,7 +4,7 @@ import * as handleRequests from "../controllers/players.controller.js";
 
 const router = express.Router();
 
-router.get("/leaderboard", handleRequests.handleGetTopTen)
+router.get("/topTen", handleRequests.handleGetTopTen)
 
 router.get("/login/:name/:password", handleRequests.handleGetPlayerByCredentials);
 

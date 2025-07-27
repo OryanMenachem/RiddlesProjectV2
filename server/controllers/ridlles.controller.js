@@ -1,13 +1,11 @@
 import * as dal from "../../DAL/riddles.dal.js";
-import {Response} from "../../utils/generalUtils.js";
 
 
-export async function getAllRiddles(req, res) {
+export async function  handleGetAllRiddles(req, res) {
 
     let response;
 
     try {
-
     response = await dal.getAllRiddles();
     return res.send(response);
 
@@ -19,8 +17,26 @@ export async function getAllRiddles(req, res) {
 }
 
 
+export async function  handleGetRiddlesByDifficulty(req, res) {
 
-export async function getRiddleById(req, res) {
+    let response;
+
+    
+    try {
+    const difficulty = req.params.difficulty;
+    response = await dal.getRiddlesByDifficulty(difficulty);
+    return res.send(response);
+
+    } catch(error) {
+        response.message = error.message;
+        response.error = true;
+        return res.send(response); 
+    }
+}
+
+
+
+export async function handleGetRiddleById(req, res) {
     
     let response;
     const id = req.params.id;
@@ -40,7 +56,7 @@ export async function getRiddleById(req, res) {
 
 
 
-export async function addRiddle(req, res) {
+export async function handleAddRiddle(req, res) {
     
     let response;
     const riddle = req.body;
@@ -57,7 +73,7 @@ export async function addRiddle(req, res) {
 }
 
 
-export async function updateRiddle(req, res){
+export async function handleUpdateRiddle(req, res){
     
     let response;
     const id = parseInt(req.params.id); 
@@ -75,7 +91,7 @@ export async function updateRiddle(req, res){
 }
     
 
-export async function deleteRiddle(req, res) {
+export async function handleDeleteRiddle(req, res) {
   
     let response;
     const id = parseInt(req.params.id);

@@ -1,6 +1,6 @@
 import {input, colors} from "../utils/generalUtils.js"
-import {riddlesOperations, displayLeaderBoard} from "./gameMenu.services.js"
-import "dotenv/config"
+import {riddlesOperations, displayTopTen} from "./services.js"
+
 
 
 
@@ -72,7 +72,7 @@ async function handleChoice(choice) {
             break; 
         case '6':
             const leaderBoard = await riddlesOperations.leaderBoard();
-            displayLeaderBoard(leaderBoard);
+            displayTopTen(leaderBoard);
             return true;
         case '7':
             console.log('\ngood by :)');
@@ -88,7 +88,6 @@ async function handleChoice(choice) {
 
 
             
-menu();
 
 // [
 //   // Easy
@@ -115,7 +114,7 @@ menu();
 //   {
 //     category: "Math",
 //     difficulty: "medium",
-//     riddleDescription: "I am an even number. Take away one letter and I become odd. What am I?",
+//     riddleDescription: "I am an odd number. Take away one letter and I become even. What am I?",
 //     correctAnswer: "Seven"
 //   },
 //   {
