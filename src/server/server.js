@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
-
-import { mongoConnection } from '../DB/mongo.js';
+import { mongoConnection } from './db/mongo.js';
 import playersRouter from './routers/players.route.js';
 import riddlesRouter from './routers/riddles.route.js';
 

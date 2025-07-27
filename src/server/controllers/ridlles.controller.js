@@ -1,4 +1,4 @@
-import * as dal from '../../DAL/riddles.dal.js';
+import * as dal from '../dal/riddles.dal.js';
 
 
 export async function  handleGetAllRiddles(req, res) {

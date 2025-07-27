@@ -30,14 +30,13 @@ export async function addPlayer(name, hashedPassword, role = 'player') {
 }
 
 
-export async function getPlayerByCredentials(name, password) {
+export async function getPlayerByName(name) {
      
      let response = new Response();
      const {data, error} = await supabase
     .from(PLAYERS_TABLE)
     .select()
     .eq('name', name)
-    .eq('password' , password)
     .single();
     
     if (error) {

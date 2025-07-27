@@ -1,5 +1,4 @@
 import express from 'express';
-
 import * as handleRequests from '../controllers/players.controller.js';
 
 

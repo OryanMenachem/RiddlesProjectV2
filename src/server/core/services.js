@@ -1,10 +1,10 @@
 import sendHttpRequest from '../../client/httpRequests.js';
 import { input, colors } from '../utils/generalUtils.js';
-
 import getId from '../utils/idGenerator.js';
 import Player from '../models/Player.js';
 import gameFlow from './gameFlow.js';
 import playerManager from './playerManager.js';
+
 
 export async function handleGuest ()  {     
 
@@ -24,20 +24,20 @@ export async function handleSignUp()  {
     const url = `http://localhost:5000/players/addPlayer`;
     const method = 'POST';
     const response = await sendHttpRequest(url, method, body);
-    return response;
-
+    
+    console.log(response.message);
 }
 
 export async function handleLogin()  {
 
     let result;
-    const name = input("Enter your name:");
-    const password = input("Enter your password:");
-    const url = `http://localhost:5000/players/login/${name}/${password}`;
-    const method = 'GET';
-    let response = await sendHttpRequest(url, method);
+
+    let response = await sendGetPlayerByCredentialsRequest();
     
-    if (response.error) {return response}
+    if (response.error) {
+        console.log(response.message);
+        return;
+    }
     
     let player = response.content;
 
@@ -48,11 +48,18 @@ export async function handleLogin()  {
         result = await playerManager(player);
     }
      
-
-
 }
 
 
+export async function sendGetPlayerByCredentialsRequest() {
+
+    const name = input("Enter your name:");
+    const password = input("Enter your password:");
+    const url = `http://localhost:5000/players/login/${name}/${password}`;
+    const method = 'GET';
+    const response = await sendHttpRequest(url, method);
+    return response;
+}
 
 export async function handleSubmitTime(id, best_time)  {
 
@@ -60,7 +67,8 @@ export async function handleSubmitTime(id, best_time)  {
     const url = `http://localhost:5000/players/submitTime`;
     const method = 'POST';
     const response = await sendHttpRequest(url, method, body);
-    return response;
+
+    console.log(response.message);
 
 }
 
@@ -71,7 +79,7 @@ export async function sendCreateRiddleRequest() {
     const url = `http://localhost:5000/riddles/add`;
     const method = 'POST';
     const response = await sendHttpRequest(url, method , riddle);
-    return response
+    console.log(response.message);
 } 
 
 /**

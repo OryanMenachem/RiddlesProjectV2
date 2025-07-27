@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
-
-import * as dal from '../../DAL/players.dal.js';
+import * as dal from '../dal/players.dal.js';
 
 
 export async function handleAddPlayer(req, res) {
@@ -27,7 +26,19 @@ export async function handleGetPlayerByCredentials(req, res) {
     try {
     const name = req.params.name;
     const password = req.params.password;
-    response = await dal.getPlayerByCredentials(name, password);      
+    
+    response = await dal.getPlayerByName(name);    
+
+    if (response.error) {return res.send(response)}
+
+    const player = response.content;
+    const isPasswordMatch = await bcrypt.compare(password, player.hashed_password);
+
+    if (isPasswordMatch) {return res.send(response)}
+
+    response.message = "Password or name does not match."
+    response.error = true;
+    response.content = null;
     return res.send(response);
  
     } catch(error) {
