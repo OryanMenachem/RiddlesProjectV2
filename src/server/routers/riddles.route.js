@@ -1,8 +1,6 @@
-import express from 'express'; 
-import  * as handleRequests  from "../controllers/ridlles.controller.js";
+import express from 'express';
 
-
-
+import * as handleRequests from '../controllers/ridlles.controller.js';
 
 
 const router = express.Router();

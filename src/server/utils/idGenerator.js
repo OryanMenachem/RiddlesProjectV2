@@ -1,4 +1,4 @@
-import {readFileSync as read, writeFileSync as write} from 'fs';
+import { readFileSync as read, writeFileSync as write } from 'fs';
 
 /**
  * Reads a numeric id from id.txt, increments it by one,

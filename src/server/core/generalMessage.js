@@ -1,4 +1,4 @@
-import {colors} from "../utils/generalUtils.js" 
+import { colors } from '../utils/generalUtils.js';
 
 
 export const message = {
