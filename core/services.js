@@ -1,9 +1,70 @@
-import sendHttpRequest from "../../client/httpRequests.js";
-import { input, colors } from "../../utils/generalUtils.js";
-import getId from "../../utils/idGenerator.js";
+import sendHttpRequest from "../client/httpRequests.js";
+import { input, colors } from "../utils/generalUtils.js";
+import getId from "../utils/idGenerator.js";
+import Player from "./models/Player.js";
+import gameFlow from "./gameFlow.js";
+import playerManager from "./playerManager.js";
+
+export async function handleGuest ()  {     
+
+    const name = input("Enter your name:");
+    const player = new Player(name);
+    await gameFlow(player);
+
+}
 
 
-async function sendCreateRiddleRequest() {
+
+export async function handleSignUp()  {
+
+    const name = input("Enter your name:");
+    const password = input("Enter a password:");
+    const body = {name, password}
+    const url = `http://localhost:5000/players/addPlayer`;
+    const method = 'POST';
+    const response = await sendHttpRequest(url, method, body);
+    return response;
+
+}
+
+export async function handleLogin()  {
+
+    let result;
+    const name = input("Enter your name:");
+    const password = input("Enter your password:");
+    const url = `http://localhost:5000/players/login/${name}/${password}`;
+    const method = 'GET';
+    let response = await sendHttpRequest(url, method);
+    
+    if (response.error) {return response}
+    
+    let player = response.content;
+
+    if (player.role == "admin") {
+        // result = await adminManager(player);
+    }
+    else if (player.role == "player") {
+        result = await playerManager(player);
+    }
+     
+
+
+}
+
+
+
+export async function handleSubmitTime(id, best_time)  {
+
+    const body = {id, best_time}
+    const url = `http://localhost:5000/players/submitTime`;
+    const method = 'POST';
+    const response = await sendHttpRequest(url, method, body);
+    return response;
+
+}
+
+
+export async function sendCreateRiddleRequest() {
 
     const riddle = createRiddle();
     const url = `http://localhost:5000/riddles/add`;
@@ -30,13 +91,21 @@ export function createRiddle() {
   return riddle
 }
 
-export async function sendReadAllRiddlesRequest()  {
+export async function sendGetAllRiddlesRequest()  {
 
     const url = `http://localhost:5000/riddles/all`;
     const method = 'GET';
     const response = await sendHttpRequest(url, method);
     return response;
-}    
+}
+
+export async function sendGetRiddlesByDifficultyRequest(difficulty)  {
+
+    const url = `http://localhost:5000/riddles/${difficulty}`;
+    const method = 'GET';
+    const response = await sendHttpRequest(url, method);
+    return response;
+} 
 
 async function sendUpdateRiddleRequest() {
 
@@ -86,13 +155,22 @@ async function sendDeleteRiddleRequest() {
 
 }
 
+export const riddlesOperations = {
+    create : sendCreateRiddleRequest,
+    read : sendGetAllRiddlesRequest,
+    update : sendUpdateRiddleRequest,
+    delete : sendDeleteRiddleRequest
+}
 
-async function sendGetLeaderBoard()  {
 
-    const url = `http://localhost:5000/players/leaderboard`;
+async function handleGetTopTen()  {
+
+    const url = `http://localhost:5000/players/topTen`;
     const method = 'GET';
     const response = await sendHttpRequest(url, method);
-    return response.content;
+    if (response.error) {return response}
+    const topTen = response.content;
+    showTopTen(topTen);
 }
 
 
@@ -100,37 +178,23 @@ async function sendGetLeaderBoard()  {
 
 
 /**
- * Shows a leaderboard of players sorted by their fastest time.
- * Reads players from a file, sorts them, and prints the list to the console.
- * @async
- * @returns {Promise<void>}
+ * Prints the top 10 players sorted by best time.
+ * @param {Array} players - Array of player objects with 'name' and 'best_time'.
  */
-
-export function  displayLeaderBoard(players) {
+function showTopTen(players) {
 
     console.log(colors.cyan("\n************************"));
-    console.log(            "      Leader board        ");
+    console.log(            "           TOP TEN        ");
     console.log(colors.cyan("************************"));
 
     players.forEach((player, i) => {
-
         const rank = colors.cyan(i + 1)
         const name = player.name.padEnd(8);
         const sec = player.best_time;
         const space = colors.cyan('-'.padEnd(4))
-
         console.log(`${rank}. ${name} ${space} ${sec} sec\n`);
     })
-    
     console.log(colors.cyan("************************\n"));
 }
         
        
-
-export const riddlesOperations = {
-    sendCreateRiddleRequest,
-    sendReadAllRiddlesRequest,
-    sendUpdateRiddleRequest,
-    sendDeleteRiddleRequest,
-    sendGetLeaderBoard
-}

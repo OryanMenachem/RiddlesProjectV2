@@ -68,6 +68,26 @@ export async function getAllRiddles() {
         
 
 
+export async function getRiddlesByDifficulty(difficulty) {
+
+    const response = new Response();
+    
+    try {      
+        const riddles = await riddlesCollection.find({"difficulty":difficulty}).toArray();
+        response.message =  `Riddles with difficulty '${difficulty}' retrieved successfully.`; 
+        response.content = riddles;
+        return response;
+        
+      } catch(error) {
+        response.message =  error.message;
+        response.error = true;
+        return response;
+      }    
+  
+  }
+        
+
+
 
 /**
  * Retrieves a single riddle by its ID from the 'riddles' collection.

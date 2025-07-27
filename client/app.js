@@ -1,6 +1,6 @@
 import "dotenv/config";
 import {message} from '../core/generalMessage.js';
-import loginMenu from '../core/loginMenu.js';
+import mainMenuManager from '../core/mainManager.js';
 
 
 
@@ -10,7 +10,7 @@ message.sayWelcome();
 
 message.displayInstructions();
 
-await loginMenu();
+await mainMenuManager();
 
 
 

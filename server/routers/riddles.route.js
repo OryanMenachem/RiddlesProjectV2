@@ -8,15 +8,17 @@ import  * as handleRequests  from "../controllers/ridlles.controller.js";
 const router = express.Router();
 
 
-router.get("/all", handleRequests.getAllRiddles)
+router.get("/all", handleRequests.handleGetAllRiddles)
 
-router.get("/:id", handleRequests.getRiddleById)
+router.get("/:difficulty", handleRequests.handleGetRiddlesByDifficulty)
 
-router.post("/add", handleRequests.addRiddle)
+router.get("/:id", handleRequests.handleGetRiddleById)
 
-router.put("/:id", handleRequests.updateRiddle)
+router.post("/add", handleRequests.handleAddRiddle)
 
-router.delete("/:id", handleRequests.deleteRiddle)
+router.put("/:id", handleRequests.handleUpdateRiddle)
+
+router.delete("/:id", handleRequests.handleDeleteRiddle)
 
    
 
