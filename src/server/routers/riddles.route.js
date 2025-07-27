@@ -8,15 +8,16 @@ const router = express.Router();
 
 router.get("/all", handleRequests.handleGetAllRiddles)
 
-router.get("/:difficulty", handleRequests.handleGetRiddlesByDifficulty)
-
 router.get("/:id", handleRequests.handleGetRiddleById)
+
+router.get("/:difficulty", handleRequests.handleGetRiddlesByDifficulty)
 
 router.post("/add", handleRequests.handleAddRiddle)
 
 router.put("/:id", handleRequests.handleUpdateRiddle)
 
 router.delete("/:id", handleRequests.handleDeleteRiddle)
+
 
    
 

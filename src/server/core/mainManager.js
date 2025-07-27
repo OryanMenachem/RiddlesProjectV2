@@ -15,10 +15,8 @@ export default async function mainMenuManager() {
 
 function showMainMenu() {
     
-    console.log('\nChoose one of the following options: \n');
-    
     const border = colors.cyan('║');
-
+    console.log('\nChoose one of the following options: \n'); 
     console.log(colors.cyan('╔═══════════════════════════════════╗'));
     console.log(border + '                                   ' + border);
     console.log(border + '  1. Play as Guest                 ' + border);

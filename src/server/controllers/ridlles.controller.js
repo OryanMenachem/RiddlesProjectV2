@@ -20,7 +20,6 @@ export async function  handleGetAllRiddles(req, res) {
 export async function  handleGetRiddlesByDifficulty(req, res) {
 
     let response;
-
     
     try {
     const difficulty = req.params.difficulty;
@@ -34,15 +33,15 @@ export async function  handleGetRiddlesByDifficulty(req, res) {
     }
 }
 
+    
+
 
 
 export async function handleGetRiddleById(req, res) {
     
     let response;
-    const id = req.params.id;
-
     try {
-
+    const id = req.params.id;
     response = await dal.getRiddleById(id);
     return res.send(response);
 
@@ -59,9 +58,9 @@ export async function handleGetRiddleById(req, res) {
 export async function handleAddRiddle(req, res) {
     
     let response;
-    const riddle = req.body;
     
     try {
+    const riddle = req.body;
     response = await dal.addRiddle(riddle);
     return res.send(response)
 
@@ -76,10 +75,10 @@ export async function handleAddRiddle(req, res) {
 export async function handleUpdateRiddle(req, res){
     
     let response;
-    const id = parseInt(req.params.id); 
-    const updatedRiddle = req.body;
     
     try {
+        const id = parseInt(req.params.id); 
+        const updatedRiddle = req.body;
         response = await dal.updateRiddleById(id, updatedRiddle)
         return res.send(response)
 
@@ -94,9 +93,9 @@ export async function handleUpdateRiddle(req, res){
 export async function handleDeleteRiddle(req, res) {
   
     let response;
-    const id = parseInt(req.params.id);
-
+    
     try {
+        const id = parseInt(req.params.id);
         response =  await dal.deleteRiddleById(id)
         return res.send(result)
         

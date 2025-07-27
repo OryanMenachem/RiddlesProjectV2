@@ -4,7 +4,7 @@ import getId from '../utils/idGenerator.js';
 import Player from '../models/Player.js';
 import gameFlow from './gameFlow.js';
 import playerManager from './playerManager.js';
-
+import adminManager from './adminManager.js';
 
 export async function handleGuest ()  {     
 
@@ -42,7 +42,7 @@ export async function handleLogin()  {
     let player = response.content;
 
     if (player.role == "admin") {
-        // result = await adminManager(player);
+        result = await adminManager(player);
     }
     else if (player.role == "player") {
         result = await playerManager(player);
@@ -73,7 +73,7 @@ export async function handleSubmitTime(id, best_time)  {
 }
 
 
-export async function sendCreateRiddleRequest() {
+export async function sendAddRiddleRequest() {
 
     const riddle = createRiddle();
     const url = `http://localhost:5000/riddles/add`;
@@ -105,7 +105,9 @@ export async function sendGetAllRiddlesRequest()  {
     const url = `http://localhost:5000/riddles/all`;
     const method = 'GET';
     const response = await sendHttpRequest(url, method);
-    return response;
+    const riddles = response.content;
+    console.log(JSON.stringify(riddles,null,2));
+    
 }
 
 export async function sendGetRiddlesByDifficultyRequest(difficulty)  {
@@ -116,7 +118,7 @@ export async function sendGetRiddlesByDifficultyRequest(difficulty)  {
     return response;
 } 
 
-async function sendUpdateRiddleRequest() {
+export async function sendUpdateRiddleRequest() {
 
     const id = input('Enter the riddle id');
     let url = `http://localhost:5000/riddles/${id}`;
@@ -124,7 +126,8 @@ async function sendUpdateRiddleRequest() {
     let response = await sendHttpRequest(url, method)    
     
     if (response.error) {return response.message}
-
+    console.log(response);
+    
     let riddle = response.content;
     riddle = await updateRiddle(riddle);
 
@@ -136,25 +139,34 @@ async function sendUpdateRiddleRequest() {
 
 export async function updateRiddle(riddle) {
   
-  for(const key in riddle) {
+  for (const key in riddle) {
 
-    if (key == "_id") {delete riddle[key]; continue;}
-    else if (key == "id") {delete riddle[key]; continue;}
+    if (key == "_id" || key == "id") {
+      delete riddle[key];
+      continue;
+    }
 
     let answer;
     while (true) {
-    answer = input(`Would you like to change the '${key}' field? (y/n)`);
-    if (answer === "y") riddle[key] = input('Update this field');
-    else if (answer === "n") break;
-    console.log(colors.error("\nInvalid input. Please enter 'y' or 'n'.\n"));
+      answer = input(`Would you like to change the '${key}' field? (y/n)`);
+
+      if (answer === "y") {
+        riddle[key] = input('Update this field');
+        break;
+      } else if (answer === "n") {
+        break;
+      } else {
+        console.log(colors.error("\nInvalid input. Please enter 'y' or 'n'.\n"));
+      }
     }
 
   }
   return riddle;
 }
+
   
 
-async function sendDeleteRiddleRequest() {
+export async function sendDeleteRiddleRequest() {
 
     const id = input('Enter the riddle id');
     const url = `http://localhost:5000/riddles/${id}`;
@@ -164,15 +176,7 @@ async function sendDeleteRiddleRequest() {
 
 }
 
-export const riddlesOperations = {
-    create : sendCreateRiddleRequest,
-    read : sendGetAllRiddlesRequest,
-    update : sendUpdateRiddleRequest,
-    delete : sendDeleteRiddleRequest
-}
-
-
-async function handleGetTopTen()  {
+export async function handleGetTopTen()  {
 
     const url = `http://localhost:5000/players/topTen`;
     const method = 'GET';
