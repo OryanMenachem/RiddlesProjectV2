@@ -1,6 +1,6 @@
-import * as dal from "../../DAL/players.dal.js";
+import bcrypt from 'bcrypt';
 
-
+import * as dal from '../../DAL/players.dal.js';
 
 
 export async function handleAddPlayer(req, res) {
@@ -8,7 +8,8 @@ export async function handleAddPlayer(req, res) {
     let response;
     try {       
     const {name, password} = req.body;
-    response = await dal.addPlayer(name, password);
+    const hashedPassword = await bcrypt.hash(password, 10);
+    response = await dal.addPlayer(name, hashedPassword);
     return res.send(response);
       
     } catch(error) {

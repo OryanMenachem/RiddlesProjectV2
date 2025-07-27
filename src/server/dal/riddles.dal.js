@@ -1,5 +1,5 @@
-import riddlesCollection from "../DB/mongo.js";
-import {Response} from "../utils/generalUtils.js";
+import riddlesCollection from '../DB/mongo.js';
+import { Response } from '../utils/generalUtils.js';
 
 /**
  * Inserts a new riddle document into the 'riddles' collection in MongoDB.

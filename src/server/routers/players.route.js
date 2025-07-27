@@ -1,5 +1,6 @@
-import express from "express";
-import * as handleRequests from "../controllers/players.controller.js";
+import express from 'express';
+
+import * as handleRequests from '../controllers/players.controller.js';
 
 
 const router = express.Router();

@@ -1,5 +1,6 @@
-import "dotenv/config";
-import {message} from '../core/generalMessage.js';
+import 'dotenv/config';
+
+import { message } from '../core/generalMessage.js';
 import mainMenuManager from '../core/mainManager.js';
 
 

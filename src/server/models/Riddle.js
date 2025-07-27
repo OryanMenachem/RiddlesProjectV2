@@ -1,4 +1,4 @@
-import {input, colors} from "../../utils/generalUtils.js";
+import { input, colors } from '../../utils/generalUtils.js';
 
 export default class Riddle {
 

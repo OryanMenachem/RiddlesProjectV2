@@ -1,7 +1,8 @@
-import { input, colors, timeDecorator } from "../utils/generalUtils.js";
-import {sendGetRiddlesByDifficultyRequest} from "../core/services.js";
-import Riddle from "./models/Riddle.js";
-import {message} from "./generalMessage.js";
+import { input, colors, timeDecorator } from '../utils/generalUtils.js';
+
+import { sendGetRiddlesByDifficultyRequest } from '../core/services.js';
+import Riddle from '../models/Riddle.js';
+import { message } from './generalMessage.js';
 
 export default async function gameFlow(player) {
   

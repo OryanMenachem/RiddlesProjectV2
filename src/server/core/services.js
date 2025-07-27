@@ -1,9 +1,10 @@
-import sendHttpRequest from "../client/httpRequests.js";
-import { input, colors } from "../utils/generalUtils.js";
-import getId from "../utils/idGenerator.js";
-import Player from "./models/Player.js";
-import gameFlow from "./gameFlow.js";
-import playerManager from "./playerManager.js";
+import sendHttpRequest from '../../client/httpRequests.js';
+import { input, colors } from '../utils/generalUtils.js';
+
+import getId from '../utils/idGenerator.js';
+import Player from '../models/Player.js';
+import gameFlow from './gameFlow.js';
+import playerManager from './playerManager.js';
 
 export async function handleGuest ()  {     
 

@@ -1,10 +1,10 @@
-import supabase from "../DB/supabase.js";
-import { Response } from "../utils/generalUtils.js";
+import supabase from '../DB/supabase.js';
+import { Response } from '../utils/generalUtils.js';
 
 
 const PLAYERS_TABLE = "players";
 
-export async function addPlayer(name, password, role = 'player') {
+export async function addPlayer(name, hashedPassword, role = 'player') {
   
   let response = new Response();
 
@@ -12,7 +12,7 @@ export async function addPlayer(name, password, role = 'player') {
     .from(PLAYERS_TABLE)
     .insert({
       'name': name,
-      'password' : password,
+      'hashed_password' : hashedPassword,
       'role' : role
     })
     .select()
