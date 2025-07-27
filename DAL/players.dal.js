@@ -1,13 +1,20 @@
 import supabase from "../DB/supabase.js";
 import { Response } from "../utils/generalUtils.js";
 
-async function addPlayer(table, player) {
+
+const PLAYERS_TABLE = "players";
+
+export async function addPlayer(name, password, role = 'player') {
   
   let response = new Response();
 
   const { data, error } = await supabase
-    .from(table)
-    .insert({"username": player})
+    .from(PLAYERS_TABLE)
+    .insert({
+      'name': name,
+      'password' : password,
+      'role' : role
+    })
     .select()
     .single(); 
 
@@ -23,15 +30,16 @@ async function addPlayer(table, player) {
 }
 
 
-async function getPlayerById(table ,id) {
+export async function getPlayerByCredentials(name, password) {
      
      let response = new Response();
-     const {data, error} = await supabase.from(table)
+     const {data, error} = await supabase
+    .from(PLAYERS_TABLE)
     .select()
-    .eq('id', id)
+    .eq('name', name)
+    .eq('password' , password)
     .single();
     
-  
     if (error) {
       response.message = error.message;
       response.error = true;
@@ -44,11 +52,15 @@ async function getPlayerById(table ,id) {
     return response;
 }
 
-async function getAllPlayers(table) {
+export async function getTopTen() {
      
      let response = new Response();
-     const {data, error} = await supabase.from(table)
-    .select()
+
+     const {data, error} = await supabase
+     .from(PLAYERS_TABLE)
+     .select()
+     .order('best_time', { ascending: true })
+     .limit(10); 
     
     if (error) {
       response.message = error.message;
@@ -63,14 +75,15 @@ async function getAllPlayers(table) {
 }
     
     
-async function best_timeUpdate(table, id, best_time) {
+export async function updateBestTime(id, best_time) {
   
     let response = new Response();
-    const updatedTime = { "best_time" : best_time };
+
+    const updatedTime = { 'best_time' : best_time };
     const { data, error } = await supabase
-      .from(table)
+      .from(PLAYERS_TABLE)
       .update(updatedTime)
-      .eq("id", id)
+      .eq('id', id)
       .select()
       .single();
 
@@ -80,18 +93,10 @@ async function best_timeUpdate(table, id, best_time) {
     }
 
     else {
-      response.message =  "best_time updated successfully";
+      response.message =  "Best time updated successfully";
       response.content =  data;
     };
     return response;
 
   } 
 
-const crudOperations = {
-      addPlayer : addPlayer,
-      getPlayerById : getPlayerById,
-      getAllPlayers : getAllPlayers,
-      best_timeUpdate : best_timeUpdate
-}
-
-export default crudOperations;

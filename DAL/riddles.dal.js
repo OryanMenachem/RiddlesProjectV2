@@ -1,4 +1,4 @@
-import {riddlesCollection} from "../DB/mongo.js";
+import riddlesCollection from "../DB/mongo.js";
 import {Response} from "../utils/generalUtils.js";
 
 /**
@@ -13,7 +13,7 @@ import {Response} from "../utils/generalUtils.js";
  * @param {Object} riddle - The riddle object to insert into the database.
  * @returns {Promise<Response>} A Response object with message, error (boolean), and optional content.
  */
-async function addRiddle(riddle) {
+export async function addRiddle(riddle) {
 
   const response = new Response();
 
@@ -22,7 +22,8 @@ async function addRiddle(riddle) {
     const result = await riddlesCollection.insertOne(riddle);
 
     if (result.acknowledged) { 
-      response.message = "The riddle was added successfully.";    
+      response.message = "The riddle was added successfully.";
+      response.content = result.insertedId;    
       return response
     }
 
@@ -47,13 +48,13 @@ async function addRiddle(riddle) {
  * @returns {Promise<Response>} Response with riddles (in `content`) or error info.
  */
 
-async function readAllRiddles() {
+export async function getAllRiddles() {
 
     const response = new Response();
     
     try {      
         const riddles = await riddlesCollection.find({}).toArray();
-        response.message =  "All riddles were read successfully.";
+        response.message =  "All riddles have been retrieved successfully.";
         response.content = riddles;
         return response;
         
@@ -79,7 +80,7 @@ async function readAllRiddles() {
  * @returns {Promise<Response>} Response with the riddle or error info.
  */
 
-async function readRiddleById(id) {
+export async function getRiddleById(id) {
 
   const response = new Response();
 
@@ -87,9 +88,9 @@ async function readRiddleById(id) {
     const riddles = await riddlesCollection.find({}).toArray();
     const riddle = riddles.find(obj => obj.id == id) 
 
-    if (!riddle) {  throw new Error("No riddle with such id was found")}
+    if (!riddle) {throw new Error("No riddle with such id was found.")}
 
-    response.message = "The riddle was read successfully.";
+    response.message = "The riddle was retrieved successfully.";
     response.content = riddle;
     return response;
 
@@ -114,7 +115,7 @@ async function readRiddleById(id) {
  * @param {Object} updatedRiddle - An object containing the fields to update.
  * @returns {Promise<Response>} Response indicating success or failure.
  */
-async function updateRiddleById(id, updatedRiddle) {
+export async function updateRiddleById(id, updatedRiddle) {
   
   const response = new Response();
   
@@ -149,7 +150,7 @@ async function updateRiddleById(id, updatedRiddle) {
  * @returns {Promise<Response>} Response indicating success or failure.
  */
 
-async function deleteRiddleById(id) {
+export async function deleteRiddleById(id) {
 
     const response = new Response();
 
@@ -171,12 +172,3 @@ async function deleteRiddleById(id) {
   }
 
 
-const crudOperations = {
-
-  addRiddle : addRiddle, 
-  readAllRiddles : readAllRiddles,
-  readRiddleById : readRiddleById,
-  updateRiddleById : updateRiddleById,
-  deleteRiddleById : deleteRiddleById
-}
-export default crudOperations

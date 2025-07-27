@@ -1,17 +1,16 @@
 import express from "express";
-import {addPlayer, getPlayer, getLeaderBoard, updateTime} from "../controllers/players.controller.js";
+import * as handleRequests from "../controllers/players.controller.js";
 
 
 const router = express.Router();
 
+router.get("/leaderboard", handleRequests.handleGetTopTen)
 
-router.get("/leaderboard", getLeaderBoard)
+router.get("/login/:name/:password", handleRequests.handleGetPlayerByCredentials);
 
-router.get("/:id", getPlayer);
+router.post("/submitTime", handleRequests.handleUpdateBestTime)
 
-router.post("/submit-score", updateTime)
-
-router.post("/:playername", addPlayer)
+router.post("/addPlayer", handleRequests.handleAddPlayer)
  
 export default router;
 

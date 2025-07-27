@@ -6,18 +6,22 @@ import {message} from "./generalMessage.js";
 export default async function gameFlow(player) {
 
   const difficultyLevel = inputDifficultyLevel();
-  let riddles = await sendReadAllRiddlesRequest();
-  riddles = riddles.filter((riddle) => riddle.difficulty == difficultyLevel)
-
+  const response = await sendReadAllRiddlesRequest();
   
+  if (response.error) {return response.message}
+  
+  let riddles = response.content;
+  
+  riddles = riddles.filter((riddle) => riddle.difficulty == difficultyLevel)
+ 
   for (let riddle of riddles) {
       riddle = new Riddle(riddle);
-      let time = timeDecorator(() => riddle.ask())
+      const time = timeDecorator(() => riddle.ask())
       player.times.push(time);
    } 
 
     message.displaySuccessMessage();
-    player.init_best_time();
+    player.updateStat();
     player.showStat();
     
     return player;   

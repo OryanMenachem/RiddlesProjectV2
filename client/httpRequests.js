@@ -13,7 +13,7 @@ import fetch from 'node-fetch';
  * @function sendHttpRequest
  * @param {string} url - The URL to which the HTTP request is sent.
  * @param {string} method - The HTTP method to use (e.g., 'GET', 'POST', 'PUT', 'DELETE').
- * @param {Object|null} [data=null] - Optional data to send in the request body (ignored for GET requests).
+ * @param {Object|null} [body=null] - Optional data to send in the request body (ignored for GET requests).
  * @returns {Promise<Object>} A promise that resolves to:
  *   - Parsed JSON response on success.
  *   - An object with an `error` property containing the error message on failure.
@@ -29,22 +29,16 @@ import fetch from 'node-fetch';
 
 
 
-export default async function sendHttpRequest(url, method, data = null) {
+export default async function sendHttpRequest(url, method, body = null) {
     
     try {
       
-      // const result = {
-      //   error: false,
-      //   message: null,
-      //   data: null
-      // }
-
       const options  = {
         method: method,
         headers: {'Content-Type': 'application/json'},
       }; 
 
-      if (method != "GET" && data != null ) {options.body = JSON.stringify(data) }
+      if (method != "GET" && body != null ) {options.body = JSON.stringify(body) }
 
       await new Promise(res => setTimeout(res, 2000));
       

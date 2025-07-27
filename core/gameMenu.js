@@ -1,5 +1,5 @@
-import {input, colors} from "../../utils/generalUtils.js"
-import {riddlesCrud, displayLeaderBoard} from "./gameMenu.services.js"
+import {input, colors} from "../utils/generalUtils.js"
+import {riddlesOperations, displayLeaderBoard} from "./gameMenu.services.js"
 import "dotenv/config"
 
 
@@ -14,20 +14,19 @@ import "dotenv/config"
  * @async
  */
 
-export default async function gameMenu() {
-    let flag = true; 
-    while(flag) { 
+export default async function menu() {
 
-        showMainMenu(); 
+    while(true) { 
+        menu(); 
         let choice = input();
-        flag = await handleChoice(choice);  //flag =>  Control flow if the user chooses to exit flag = false
-        
+        const shouldContinue = await handleChoice(choice);  
+        if (!shouldContinue) {break;}
     } 
 }
 
 
 
-function showMainMenu() {
+function menu() {
 
     console.log('\nChoose one of the following options: \n');
     
@@ -60,19 +59,19 @@ async function handleChoice(choice) {
         case '1':
             break;
         case '2':
-            result = await riddlesCrud.create();      
+            result = await riddlesOperations.create();      
             break;
         case '3':
-            result = await riddlesCrud.read();     
+            result = await riddlesOperations.read();     
             break;
         case '4':
-            result = await riddlesCrud.update(); 
+            result = await riddlesOperations.update(); 
             break;
         case '5': 
-            result = await riddlesCrud.delete();
+            result = await riddlesOperations.delete();
             break; 
         case '6':
-            const leaderBoard = await riddlesCrud.leaderBoard();
+            const leaderBoard = await riddlesOperations.leaderBoard();
             displayLeaderBoard(leaderBoard);
             return true;
         case '7':
@@ -89,7 +88,7 @@ async function handleChoice(choice) {
 
 
             
-gameMenu();
+menu();
 
 // [
 //   // Easy

@@ -1,5 +1,5 @@
 import express from 'express'; 
-import {getAllRiddles, getRiddleById, addRiddle, deleteRiddle, updateRiddle} from "../controllers/ridlles.controller.js";
+import  * as handleRequests  from "../controllers/ridlles.controller.js";
 
 
 
@@ -8,15 +8,15 @@ import {getAllRiddles, getRiddleById, addRiddle, deleteRiddle, updateRiddle} fro
 const router = express.Router();
 
 
-router.get("/all", getAllRiddles)
+router.get("/all", handleRequests.getAllRiddles)
 
-router.get("/:id", getRiddleById)
+router.get("/:id", handleRequests.getRiddleById)
 
-router.post("/add", addRiddle)
+router.post("/add", handleRequests.addRiddle)
 
-router.put("/:id", updateRiddle)
+router.put("/:id", handleRequests.updateRiddle)
 
-router.delete("/:id", deleteRiddle)
+router.delete("/:id", handleRequests.deleteRiddle)
 
    
 

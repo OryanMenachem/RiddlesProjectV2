@@ -50,28 +50,12 @@ export function timeDecorator(fn) {
 
     
 
-/**
- * Represents a standard response object for operations such as database actions.
- *
- * Useful for returning consistent structure with message, error state, and optional content.
- */
 export class Response {
-  /**
-   * Creates a new Response instance.
-   *
-   * @param {string|null} [message=null] - A message describing the result or error.
-   * @param {boolean} [error=false] - Indicates whether an error occurred.
-   * @param {any} [content=null] - Optional data or result content to return.
-   */
-  constructor(message = null, error = false, content = null) {
-    /** @type {string|null} */
-    this.message = message;
 
-    /** @type {boolean} */
-    this.error = error;
-
-    /** @type {any} */
-    this.content = content;
+  constructor() {
+    this.message = null;
+    this.error = false;
+    this.content = null;
   }
 }
 

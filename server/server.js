@@ -2,7 +2,7 @@ import "dotenv/config";
 import express from "express";
 import playersRouter from "./routers/players.route.js";
 import riddlesRouter from "./routers/riddles.route.js";
-
+import {mongoConnection} from "../DB/mongo.js"
 
 
 const server = express();
@@ -16,13 +16,16 @@ server.use('/riddles', riddlesRouter)
 
 function startListening() {
 
-    try {server.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}...`)) }
+    try {server.listen(
+        process.env.PORT, 
+        () => console.log(`Server listening on port ${process.env.PORT}...`)) 
+    }
 
     catch(err) {console.log(`Listening error \n${err.message}`)}
 }
 
 startListening();
-    
+mongoConnection.open();    
 
 
 
