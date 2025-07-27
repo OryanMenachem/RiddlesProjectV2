@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "app": "clear && node --watch client/app.js",
+    "app": "clear && node  client/app.js",
     "server": "clear && node --watch server/server.js"
   },
   "repository": {

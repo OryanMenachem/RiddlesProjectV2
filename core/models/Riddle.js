@@ -17,10 +17,10 @@ export default class Riddle {
         while (true) {
 
             this.displayRiddle(); // Riddle description in fine print.
-
             const answer = input();
- 
-            if (answer == this.correctAnswer) { console.log(colors.success(`\ncorrect answer :)\n`)); return;}
+            if (answer == this.correctAnswer) { 
+                return console.log(colors.success(`\ncorrect answer :)\n`));
+            }
 
             console.log(colors.error(`\nwrong answer :(\n`));
         }

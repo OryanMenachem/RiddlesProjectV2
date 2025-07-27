@@ -1,10 +1,6 @@
-import {createRiddle} from "../CRUD/riddles.js";
-import {updateRiddle} from "../CRUD/riddles.js";
 import sendHttpRequest from "../../client/httpRequests.js";
 import { input, colors } from "../../utils/generalUtils.js";
-
-
-
+import getId from "../../utils/idGenerator.js";
 
 
 async function sendCreateRiddleRequest() {
@@ -13,17 +9,33 @@ async function sendCreateRiddleRequest() {
     const url = `http://localhost:5000/riddles/add`;
     const method = 'POST';
     const response = await sendHttpRequest(url, method , riddle);
-    
     return response
 } 
+
+/**
+ * Creates a new riddle object using user input.
+ * Prompts the user to enter details like category, difficulty, description, and answer.
+ * @returns {Object} A riddle object with id, category, difficulty, description, and correct answer.
+ */
+
+export function createRiddle() {
+
+    const riddle =   {
+        id : getId(),
+        category : input('Enter the category of the riddle'),
+        difficulty : input('Enter the difficulty level of the riddle'),
+        riddleDescription : input('Enter the description of the riddle'),
+        correctAnswer : input('Enter the correct answer to the riddle')
+  }
+  return riddle
+}
 
 export async function sendReadAllRiddlesRequest()  {
 
     const url = `http://localhost:5000/riddles/all`;
     const method = 'GET';
-    const response = await sendHttpRequest(url, method)
-    
-    return response
+    const response = await sendHttpRequest(url, method);
+    return response;
 }    
 
 async function sendUpdateRiddleRequest() {
@@ -31,17 +43,38 @@ async function sendUpdateRiddleRequest() {
     const id = input('Enter the riddle id');
     let url = `http://localhost:5000/riddles/${id}`;
     let method = 'GET';
-    let riddle = await sendHttpRequest(url, method)    
+    let response = await sendHttpRequest(url, method)    
     
-    if (riddle.error) {return riddle.error}
-    
+    if (response.error) {return response.message}
+
+    let riddle = response.content;
     riddle = await updateRiddle(riddle);
+
     url = `http://localhost:5000/riddles/${id}`;
     method = 'PUT';
-    const response = await sendHttpRequest(url, method, riddle)
-   
+    response = await sendHttpRequest(url, method, riddle)
     return response
 }    
+
+export async function updateRiddle(riddle) {
+  
+  for(const key in riddle) {
+
+    if (key == "_id") {delete riddle[key]; continue;}
+    else if (key == "id") {delete riddle[key]; continue;}
+
+    let answer;
+    while (true) {
+    answer = input(`Would you like to change the '${key}' field? (y/n)`);
+    if (answer === "y") riddle[key] = input('Update this field');
+    else if (answer === "n") break;
+    console.log(colors.error("\nInvalid input. Please enter 'y' or 'n'.\n"));
+    }
+
+  }
+  return riddle;
+}
+  
 
 async function sendDeleteRiddleRequest() {
 
@@ -56,12 +89,10 @@ async function sendDeleteRiddleRequest() {
 
 async function sendGetLeaderBoard()  {
 
-    let response  = new Response();
     const url = `http://localhost:5000/players/leaderboard`;
     const method = 'GET';
-    response = await sendHttpRequest(url, method);
+    const response = await sendHttpRequest(url, method);
     return response.content;
-
 }
 
 
@@ -84,7 +115,7 @@ export function  displayLeaderBoard(players) {
     players.forEach((player, i) => {
 
         const rank = colors.cyan(i + 1)
-        const name = player.username.padEnd(8);
+        const name = player.name.padEnd(8);
         const sec = player.best_time;
         const space = colors.cyan('-'.padEnd(4))
 
@@ -96,10 +127,10 @@ export function  displayLeaderBoard(players) {
         
        
 
-export const riddlesCrud = {
-    create : sendCreateRiddleRequest,
-    read : sendReadAllRiddlesRequest,
-    update : sendUpdateRiddleRequest,
-    delete : sendDeleteRiddleRequest,
-    leaderBoard : sendGetLeaderBoard
+export const riddlesOperations = {
+    sendCreateRiddleRequest,
+    sendReadAllRiddlesRequest,
+    sendUpdateRiddleRequest,
+    sendDeleteRiddleRequest,
+    sendGetLeaderBoard
 }

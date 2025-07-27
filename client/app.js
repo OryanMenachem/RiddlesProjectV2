@@ -1,15 +1,19 @@
+import "dotenv/config";
 import {message} from '../core/generalMessage.js';
-import loginMenu from '../core/menus/loginMenu.js';
-import { mongoConnection } from '../DB/mongo.js';
+import loginMenu from '../core/loginMenu.js';
 
 
 
-await mongoConnection.open();
+
 
 message.sayWelcome();
 
 message.displayInstructions();
 
 await loginMenu();
+
+
+
+
 
 

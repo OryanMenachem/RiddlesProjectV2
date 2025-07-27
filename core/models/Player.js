@@ -3,37 +3,32 @@ import {colors} from "../../utils/generalUtils.js";
 export default  class Player {
 
     constructor(id = null, name, best_time = 0) {
-
         this.id =  id;
         this.name = name;
-        this.times = [];       // Array of times per riddle
+        this.times = [];        
+        this.totalTime = 0;
+        this.currentRiddleAvgTime = 0;
         this.best_time = best_time;
     }
-
-    #totalTime() {return this.times.reduce((total, time) => total += time, 0)}
    
-    init_best_time() { 
+    updateStat() { 
 
-        const totalTime = this.#totalTime();
+        this.totalTime = this.times.reduce((total, time) => total += time, 0);
+       
+        if (this.totalTime > 0) {
+            this.currentRiddleAvgTime = this.totalTime / this.times.length;
 
-        if(totalTime > 0) {               
-            const currentTimeAverage = totalTime / this.times.length;
-            
-            if (this.best_time === 0 || currentTimeAverage < this.best_time) {
-                this.best_time = currentTimeAverage;
-            }
-        }
+        if ( this.best_time === 0 || this.currentRiddleAvgTime < this.best_time) 
+        {
+            this.best_time = this.currentRiddleAvgTime;
+        } }
     }
-
-    #averageRiddleTime() {
-        const totalTime = this.#totalTime();
-        return totalTime / this.times.length 
-        }
+    
   
-
     showStat() {
-        console.log(`Total time: ${colors.cyan(this.#totalTime())} sec.`);
-        console.log(`Average Time Per riddle: ${colors.cyan(this.#averageRiddleTime())} sec.`);
+        console.log(`Total time: ${colors.cyan(this.totalTime)} sec.`);
+        console.log(`Average Time Per riddle: ${colors.cyan(this.currentRiddleAvgTime)} sec.`);
+        console.log(`The best time ever: ${colors.cyan(this.best_time)} sec.`);
     }
 }
         

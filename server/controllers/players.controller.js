@@ -1,13 +1,14 @@
-import crudOperations from "../../DAL/players.dal.js";
-import { Response } from "../../utils/generalUtils.js";
+import * as dal from "../../DAL/players.dal.js";
 
-export async function addPlayer(req, res) {
- 
-    let response = new Response();
-    
+
+
+
+export async function handleAddPlayer(req, res) {
+
+    let response;
     try {       
-    const playername = req.params.playername;
-    response = await crudOperations.addPlayer("players", playername);
+    const {name, password} = req.body;
+    response = await dal.addPlayer(name, password);
     return res.send(response);
       
     } catch(error) {
@@ -18,14 +19,14 @@ export async function addPlayer(req, res) {
 }
 
 
-export async function getPlayer(req, res) {
+export async function handleGetPlayerByCredentials(req, res) {
 
-    
-    let response = new Response();
-    
+    let response;
+
     try {
-    const playerId = req.params.id;
-    response = await crudOperations.getPlayerById("players", playerId);      
+    const name = req.params.name;
+    const password = req.params.password;
+    response = await dal.getPlayerByCredentials(name, password);      
     return res.send(response);
  
     } catch(error) {
@@ -35,37 +36,27 @@ export async function getPlayer(req, res) {
     }
 }
 
-export async function getLeaderBoard(req, res) {
+export async function handleGetTopTen(req, res) {
  
-    let response = new Response();
+    let response;
     
     try {
-    response = await crudOperations.getAllPlayers("players");
-
-    if (response.content) {
-        let sortedPlayers =  response.content;
-        sortedPlayers.sort(
-            (player1, player2) => player1.lowestTime - player2.lowestTime
-        );
-        response.content = sortedPlayers;
-    }
-          
+    response = await dal.getTopTen();
     return res.send(response);
  
     } catch(error) {
-
         response.message = error.message;
         response.error = true;
         return res.send(response)
     }
 }
 
-export async function updateTime(req, res) {
+export async function handleUpdateBestTime(req, res) {
    
-    let response = new Response();  
+    let response;  
     try {
-    const {playerId, best_time } = req.body;
-    response = await crudOperations.best_timeUpdate("players", playerId, best_time);      
+    const {id, best_time} = req.body;
+    response = await dal.updateBestTime(id, best_time);      
     return res.send(response);
  
     } catch(error) {
@@ -74,3 +65,6 @@ export async function updateTime(req, res) {
         return res.send(response)
     }
 }
+
+
+
