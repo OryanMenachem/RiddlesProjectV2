@@ -17,13 +17,15 @@ function showMainMenu() {
     
     console.log('\nChoose one of the following options: \n');
     
+    const border = colors.cyan('║');
+
     console.log(colors.cyan('╔═══════════════════════════════════╗'));
-    console.log(colors.cyan('║') + '                                   ' + colors.cyan('║'));
-    console.log(colors.cyan('║') + '  1. Play as Guest                 ' + colors.cyan('║'));
-    console.log(colors.cyan('║') + '  2. Sign up                       ' + colors.cyan('║'));
-    console.log(colors.cyan('║') + '  3. Login                         ' + colors.cyan('║'));
-    console.log(colors.cyan('║') + '  4. Exit                          ' + colors.cyan('║'));
-    console.log(colors.cyan('║') + '                                   ' + colors.cyan('║'));
+    console.log(border + '                                   ' + border);
+    console.log(border + '  1. Play as Guest                 ' + border);
+    console.log(border + '  2. Sign up                       ' + border);
+    console.log(border + '  3. Login                         ' + border);
+    console.log(border + '  4. Exit                          ' + border);
+    console.log(border + '                                   ' + border);
     console.log(colors.cyan('╚═══════════════════════════════════╝') + '\n');
 }
 

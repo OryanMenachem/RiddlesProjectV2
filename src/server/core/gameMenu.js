@@ -1,6 +1,6 @@
 import { input, colors } from '../utils/generalUtils.js';
-
 import { riddlesOperations, displayTopTen } from './services.js';
+
 
 
 /**
@@ -26,19 +26,22 @@ export default async function menu() {
 
 function menu() {
 
+    const border = colors.cyan('║');
     console.log('\nChoose one of the following options: \n');
-    
-    console.log(`${colors.cyan('**************')} MENU ${colors.cyan('**************')}`);
-    console.log(`${colors.cyan('* 1.')} Play the game               ${colors.cyan('*')}`);
-    console.log(`${colors.cyan('* 2.')} Create a new riddle         ${colors.cyan('*')}`);
-    console.log(`${colors.cyan('* 3.')} Read all riddles            ${colors.cyan('*')}`);
-    console.log(`${colors.cyan('* 4.')} Update an existing riddle   ${colors.cyan('*')}`);
-    console.log(`${colors.cyan('* 5.')} Delete a riddle             ${colors.cyan('*')}`);
-    console.log(`${colors.cyan('* 6.')} View leaderboard            ${colors.cyan('*')}`);
-    console.log(`${colors.cyan('* 7.')} Exit                        ${colors.cyan('*')}`);
-    console.log(colors.cyan('**********************************\n'));
-
+    console.log(colors.cyan('╔════════════════════ MENU ════════════════════╗'));
+    console.log(border + ' 1. Play the game               ' + border);
+    console.log(border + ' 2. Create a new riddle         ' + border);
+    console.log(border + ' 3. Read all riddles            ' + border);
+    console.log(border + ' 4. Update an existing riddle   ' + border);
+    console.log(border + ' 5. Delete a riddle             ' + border);
+    console.log(border + ' 6. View leaderboard            ' + border);
+    console.log(border + ' 7. Exit                        ' + border);
+    console.log(colors.cyan('╚══════════════════════════════════════════════╝\n'));
 }
+    
+  
+
+
 
 
 
@@ -87,20 +90,6 @@ async function handleChoice(choice) {
 
             
 
-// [
-//   // Easy
-//   {
-//     category: "Logic",
-//     difficulty: "easy",
-//     riddleDescription: "What has keys but can't open locks?",
-//     correctAnswer: "Piano"
-//   },
-//   {
-//     category: "Everyday",
-//     difficulty: "easy",
-//     riddleDescription: "What has a face and two hands but no arms or legs?",
-//     correctAnswer: "Clock"
-//   },
 //   {
 //     category: "Object",
 //     difficulty: "easy",
