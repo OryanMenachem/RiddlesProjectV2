@@ -61,7 +61,7 @@ npm install
 
 1. Create `.env` file in root directory:
 ```
-PORT=3000
+PORT=5000
 JWT_SECRET=your_secret_key_here
 ```
 
