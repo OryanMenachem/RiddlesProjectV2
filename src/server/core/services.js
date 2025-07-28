@@ -3,8 +3,8 @@ import { input, colors } from '../utils/generalUtils.js';
 import getId from '../utils/idGenerator.js';
 import Player from '../models/Player.js';
 import gameFlow from './gameFlow.js';
-import playerManager from './playerManager.js';
-import adminManager from './adminManager.js';
+import playerManager from './playerManu.js';
+import adminManager from './adminManu.js';
 
 export async function handleGuest ()  {     
 
@@ -112,7 +112,7 @@ export async function sendGetAllRiddlesRequest()  {
 
 export async function sendGetRiddlesByDifficultyRequest(difficulty)  {
 
-    const url = `http://localhost:5000/riddles/${difficulty}`;
+    const url = `http://localhost:5000/riddles/difficulty/${difficulty}`;
     const method = 'GET';
     const response = await sendHttpRequest(url, method);
     return response;
