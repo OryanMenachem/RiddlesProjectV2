@@ -1,18 +1,12 @@
 import bcrypt from 'bcrypt';
 import * as dal from '../dal/players.dal.js';
 import { Response } from '../utils/generalUtils.js';
-
-
-
+import { isInvalid } from '../utils/generalUtils.js';
 
 export async function addPlayerController(req, res) {
     const response = new Response();
     try {
         const { name, password } = req.body;
-
-        // Validation helper
-        const isInvalid = (val, type = "string", minLen = 1) =>
-            !val || typeof val !== type || (type === "string" && val.trim().length < minLen);
 
         if (isInvalid(name)) {
             response.error = true;
@@ -42,9 +36,6 @@ export async function loginPlayerController(req, res) {
     let response = new Response();
     try {
         const { name, password } = req.params;
- 
-        const isInvalid = (val, type = "string", minLen = 1) =>
-            !val || typeof val !== type || (type === "string" && val.trim().length < minLen);
 
         if (isInvalid(name) || isInvalid(password, "string", 4)) {
             response.error = true;
@@ -106,6 +97,3 @@ export async function updateBestTimeController(req, res) {
         return res.send(response)
     }
 }
-
-
-

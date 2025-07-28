@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/topTen", handleRequests.getTopTenController)
 
-router.get("/login/:name/:password", handleRequests.getPlayerByCredentialsController);
+router.get("/login/:name/:password", handleRequests.loginPlayerController);
 
 router.post("/submitTime", handleRequests.updateBestTimeController)
 
