@@ -1,63 +1,59 @@
 import fetch from 'node-fetch';
 
 
+
+
+
+
 /**
- * Sends an HTTP request using the specified method, URL, and optional data payload.
- *
- * - Automatically sets the 'Content-Type' header to 'application/json'.
- * - For non-GET requests, serializes the `data` object as a JSON string and includes it in the request body.
- * - Introduces a 1-second artificial delay before sending the request.
- * - If the response status is not OK (i.e., status code 4xx or 5xx), throws an error which is caught and returned.
- *
+ * Sends an HTTP request and returns the response as a JSON object.
  * @async
  * @function sendHttpRequest
- * @param {string} url - The URL to which the HTTP request is sent.
- * @param {string} method - The HTTP method to use (e.g., 'GET', 'POST', 'PUT', 'DELETE').
- * @param {Object|null} [body=null] - Optional data to send in the request body (ignored for GET requests).
- * @returns {Promise<Object>} A promise that resolves to:
- *   - Parsed JSON response on success.
- *   - An object with an `error` property containing the error message on failure.
- *
- * @example
- * const result = await sendHttpRequest('https://localhost:5000/riddles', 'POST', { key: value });
- * if (result.error) {
- *   console.error('Request failed:', result.error);
- * } else {
- *   console.log('Success:', result);
- * }
+ * @param {string} url - The endpoint to send the request to.
+ * @param {string} method - The HTTP method (GET, POST, etc.).
+ * @param {object|null} [body=null] - The request body for methods like POST or PUT.
+ * @returns {Promise<object>} The parsed JSON response object, or an error object if the request fails.
  */
-
-
-
 export default async function sendHttpRequest(url, method, body = null) {
-    
+  const options = {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+    if (method.toUpperCase() !== "GET" && body !== null) {
+        options.body = JSON.stringify(body);
+    }
+
+    await new Promise(res => setTimeout(res, 1000));
+
     try {
-      
-      const options  = {
-        method: method,
-        headers: {'Content-Type': 'application/json'},
-      }; 
+        let res = await fetch(url, options);
 
-      if (method != "GET" && body != null ) {options.body = JSON.stringify(body) }
+        let response;
+        try {
+            response = await res.json();
+        } catch (jsonError) {
+            response.error = true;
+            response.message = jsonError.message;
+            response.status = res.status;
+            return response;
+        }
 
-      await new Promise(res => setTimeout(res, 2000));
-      
-      let response = await fetch(url, options);
 
-      if (!response.ok) {
-  
-        throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
+        if (!res.ok) {
+            response.error = true;
+            response.message = res.statusText;
+            response.status = res.status;
+            return response;
+        }
+
+        return response;
+      } catch (error) {
+          response.error = true;
+          response.message = error.message;
+          response.status = 500;
+          return response;
       }
-            
-      return await response.json();
-      
-    } catch(error) { return {error : error.message}}
 }
-  
-
-      
-
-
-   
 
 

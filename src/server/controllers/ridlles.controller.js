@@ -1,7 +1,7 @@
 import * as dal from '../dal/riddles.dal.js';
 
 
-export async function  handleGetAllRiddles(req, res) {
+export async function  getAllRiddlesController(req, res) {
 
     let response;
 
@@ -17,7 +17,7 @@ export async function  handleGetAllRiddles(req, res) {
 }
 
 
-export async function  handleGetRiddlesByDifficulty(req, res) {
+export async function  getRiddlesByDifficultyController(req, res) {
 
     let response;
     
@@ -37,7 +37,7 @@ export async function  handleGetRiddlesByDifficulty(req, res) {
 
 
 
-export async function handleGetRiddleById(req, res) {
+export async function getRiddleByIdController(req, res) {
     
     let response;
     try {
@@ -55,7 +55,7 @@ export async function handleGetRiddleById(req, res) {
 
 
 
-export async function handleAddRiddle(req, res) {
+export async function addRiddleController(req, res) {
     
     let response;
     
@@ -72,7 +72,7 @@ export async function handleAddRiddle(req, res) {
 }
 
 
-export async function handleUpdateRiddle(req, res){
+export async function updateRiddleController(req, res){
     
     let response;
     
@@ -90,7 +90,7 @@ export async function handleUpdateRiddle(req, res){
 }
     
 
-export async function handleDeleteRiddle(req, res) {
+export async function deleteRiddleController(req, res) {
   
     let response;
     
