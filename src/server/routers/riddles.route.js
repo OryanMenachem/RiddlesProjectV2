@@ -1,22 +1,21 @@
 import express from 'express';
-
-import * as handleRequests from '../controllers/ridlles.controller.js';
+import * as handleRequests from '../controllers/riddles.controller.js';
 
 
 const router = express.Router();
 
 
-router.get("/all", handleRequests.handleGetAllRiddles)
+router.get("/all", handleRequests.getAllRiddlesController)
 
-router.get("/:id", handleRequests.handleGetRiddleById)
+router.get("/:id", handleRequests.getRiddleByIdController)
 
-router.get("/difficulty/:difficulty", handleRequests.handleGetRiddlesByDifficulty)
+router.get("/difficulty/:difficulty", handleRequests.getRiddlesByDifficultyController)
 
-router.post("/add", handleRequests.handleAddRiddle)
+router.post("/add", handleRequests.addRiddleController)
 
-router.put("/:id", handleRequests.handleUpdateRiddle)
+router.put("/:id", handleRequests.updateRiddleController)
 
-router.delete("/:id", handleRequests.handleDeleteRiddle)
+router.delete("/:id", handleRequests.deleteRiddleController)
 
 
    
