@@ -10,7 +10,7 @@ router.get("/all", handleRequests.handleGetAllRiddles)
 
 router.get("/:id", handleRequests.handleGetRiddleById)
 
-router.get("/:difficulty", handleRequests.handleGetRiddlesByDifficulty)
+router.get("/difficulty/:difficulty", handleRequests.handleGetRiddlesByDifficulty)
 
 router.post("/add", handleRequests.handleAddRiddle)
 
