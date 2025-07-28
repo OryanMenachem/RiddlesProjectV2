@@ -56,6 +56,7 @@ export class Response {
     this.message = null;
     this.error = false;
     this.content = null;
+    this.status = null;
   }
 }
 
