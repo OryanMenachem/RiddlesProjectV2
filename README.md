@@ -51,19 +51,6 @@ RiddlesProjectV2/
             └── idGenerator.js
 ```
 
-## Installation
-
-```bash
-npm install
-```
-
-## Setup
-
-1. Create `.env` file in root directory:
-```
-PORT=5000
-JWT_SECRET=your_secret_key_here
-```
 
 2. Start the server:
 ```bash
