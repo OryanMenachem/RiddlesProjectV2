@@ -7,7 +7,8 @@ export const message = {
 
   displayInstructions() {
     console.log(
-      'In this game, you will need to answer several regular \nand multiple-choice questions with different difficulty levels.\n'
+      'In this game, you will need to answer several regular' +
+      '\nand multiple-choice questions with different difficulty levels.\n'
     );
   },
 
@@ -15,11 +16,7 @@ export const message = {
     console.log(`\nHello ${colors.cyan(playerName)}, starting right away...\n`);
   },
 
-  displaySuccessMessage() {
-    console.log(colors.cyan('Congratulations!'), 'you won the RIDDLES game.\n');
-  },
-
-  commit(message) {
-    console.log(colors.green('Commit successful:'), message);
+  showSuccessMessage() {
+    console.log(colors.cyan('Congratulations!', 'you won the RIDDLES game.\n'));
   }
 };

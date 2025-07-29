@@ -1,5 +1,5 @@
 import { input, colors } from '../utils/generalUtils.js';
-import { handleSignUp, handleGuest, handleLogin } from './services.js';
+import { handleSignUp, handleGuest, handleLogin } from '../services/services.js';
 
 
 export default async function mainMenuManager() {
