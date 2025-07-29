@@ -51,17 +51,6 @@ RiddlesProjectV2/
             └── idGenerator.js
 ```
 
-
-2. Start the server:
-```bash
-npm run server
-```
-
-3. Start the game:
-```bash
-npm run app
-```
-
 ## How to Play
 
 1. Choose to play as guest, sign up, or login
