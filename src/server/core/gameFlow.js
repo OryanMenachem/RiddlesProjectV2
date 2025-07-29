@@ -3,37 +3,42 @@ import { sendGetRiddlesByDifficultyRequest } from '../core/services.js';
 import Riddle from '../models/Riddle.js';
 import { message } from './generalMessage.js';
 
+const DIFFICULTY_LEVELS = ["easy", "medium", "hard"];
+
 export default async function gameFlow(player) {
-  
-  const difficultyLevel = inputDifficultyLevel();
-  const response = await sendGetRiddlesByDifficultyRequest(difficultyLevel);
+  const difficulty = inputDifficultyLevel();
+  const response = sendGetRiddlesByDifficultyRequest(difficulty);
 
-  if (response.error) {return response.message}
-  
-  let riddles = response.content;
-  
-  for (let riddle of riddles) {
-      riddle = new Riddle(riddle);
-      const time = timeDecorator(() => riddle.ask())
-      player.times.push(time);
-   } 
+  if (response.error) {
+    return response.message;
+  }
 
-    message.displaySuccessMessage();
-    player.updateStat();
-    player.showStat();
-    
-    return player;   
+  const riddles = response.content;
+  askRiddlesAndTrackTime(player, riddles);
+
+  message.displaySuccessMessage();
+  player.updateStat();
+  player.showStat();
+
+  return player;
+}
+
+function inputDifficultyLevel() {
+  while (true) {
+    const chosenDifficulty = input("Choose difficulty level: easy/medium/hard").toLowerCase();
+    if (DIFFICULTY_LEVELS.includes(chosenDifficulty)) {
+      return chosenDifficulty;
+    }
+    console.log(colors.error('\nInvalid choice!'));
+  }
 }
 
 
-function inputDifficultyLevel() {
 
-  while(true) {
-
-    const levels = ["easy", "medium", "hard"];
-    let difficultyLevel = input("Choose difficulty level: easy/medium/hard");
-    if (levels.includes(difficultyLevel.toLowerCase())) {return difficultyLevel}
-    console.log(colors.error('\nInvalid choice!'));
-
+function askRiddlesAndTrackTime(player, riddles) {
+  for (let riddle of riddles) {
+    riddle = new Riddle(riddle);
+    const riddleTime = timeDecorator(() => riddle.ask());
+    player.times.push(riddleTime);
   }
 }

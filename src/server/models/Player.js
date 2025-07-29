@@ -44,7 +44,7 @@ export default class Player {
         console.log(`The best time ever: ${colors.cyan(this.best_time)} sec.`);
     }
 }
-        
+         
 
 
 
