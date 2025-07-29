@@ -21,7 +21,7 @@ export const colors = {
  */
 export function input(message) {
   if (message) {
-    console.log(`\n${message}\n`);
+    console.log('\n' + message + '\n');
   }
 
   let userInput;
