@@ -8,13 +8,13 @@ const DIFFICULTY_LEVELS = ["easy", "medium", "hard"];
 export default async function gameFlow(player) {
   const difficulty = inputDifficultyLevel();
   const response = await sendGetRiddlesByDifficultyRequest(difficulty);
-
   
   if (response.error) {
     return response.message;
   }
 
   const riddles = response.content;
+  
   askRiddlesAndTrackTime(player, riddles);
 
   message.showSuccessMessage();
@@ -43,6 +43,8 @@ function askRiddlesAndTrackTime(player, riddles) {
     player.times.push(riddleTime);
   }
 }
+    
+    
 
 
 

@@ -115,8 +115,6 @@ export async function sendGetRiddlesByDifficultyRequest(difficulty)  {
     const url = `http://localhost:5000/riddles/difficulty/${difficulty}`;
     const method = 'GET';
     const response = await sendHttpRequest(url, method);
-    console.log(response);  //
-    
     return response;
 } 
 

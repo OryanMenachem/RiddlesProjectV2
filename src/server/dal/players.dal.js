@@ -1,6 +1,6 @@
 import supabase from '../DB/supabase.js';
 import { Response } from '../utils/generalUtils.js';
-
+import {HTTP_STATUS} from '../utils/generalUtils.js';
 
 const PLAYERS_TABLE = "players";
 

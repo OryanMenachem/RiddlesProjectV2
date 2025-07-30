@@ -1,32 +1,42 @@
 import bcrypt from 'bcrypt';
 import * as dal from '../dal/players.dal.js';
 import { Response } from '../utils/generalUtils.js';
-import { isInvalid } from '../utils/generalUtils.js';
+import { isInvalid, isTooShort } from '../utils/generalUtils.js';
+import { HTTP_STATUS } from '../utils/generalUtils.js';
+
+
 
 export async function addPlayerController(req, res) {
     const response = new Response();
+
     try {
         const { name, password } = req.body;
-
+        
         if (isInvalid(name)) {
             response.error = true;
             response.message = "Name is required and must be a non-empty string.";
-            return res.send(response);
+            return res.status(HTTP_STATUS.BAD_REQUEST).send(response);
         }
-        if (isInvalid(password, "string", 4)) {
+        if (isInvalid(password, "string") || isTooShort(password, "string", 4)) {
             response.error = true;
             response.message = "Password is required and must be at least 4 characters.";
-            return res.send(response);
+            return res.status(HTTP_STATUS.BAD_REQUEST).send(response);
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const dalResponse = await dal.addPlayer(name, hashedPassword);
-        return res.send(dalResponse);
+
+        if (dalResponse.error) {
+            const status = HTTP_STATUS.CONFLICT;
+            return res.status(status).send(dalResponse);
+        }
+
+        return res.status(HTTP_STATUS.CREATED).send(dalResponse);
 
     } catch (error) {
         response.error = true;
         response.message = error.message;
-        return res.send(response);
+        return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).send(response);
     }
 }
 
@@ -37,7 +47,7 @@ export async function loginPlayerController(req, res) {
     try {
         const { name, password } = req.params;
 
-        if (isInvalid(name) || isInvalid(password, "string", 4)) {
+        if (isInvalid(name) || isInvalid(password, "string")) {
             response.error = true;
             response.message = "Name and password are required. Password must be at least 4 characters.";
             return res.send(response);

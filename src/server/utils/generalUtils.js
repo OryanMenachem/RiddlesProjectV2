@@ -56,20 +56,34 @@ export class Response {
     this.message = null;
     this.error = false;
     this.content = null;
-    this.status = null;
   }
 }
 
 /**
- * Checks if a value is invalid based on type and minimum length.
- * @param {*} val - The value to check.
- * @param {string} [type="string"] - The expected type of the value.
- * @param {number} [minLen=1] - The minimum length for string values.
+ * Determines if a value is invalid based on its type.
+ * Returns true if the value is null/undefined or does not match the expected type.
+ * @param {*} val - The value to validate.
+ * @param {string} type - The expected JavaScript type as a string (e.g., "string", "number").
  * @returns {boolean} True if the value is invalid, false otherwise.
  */
-export function isInvalid(val, type = "string", minLen = 1) {
+export function isInvalid(val, type = "string") {
     if (val == null) return true;
     if (typeof val !== type) return true;
-    if (type === "string" && val.trim().length < minLen) return true;
     return false;
 }
+
+export function isTooShort(str, minLen = 1) {
+      return str.trim().length < minLen;
+}
+
+export const HTTP_STATUS = {
+  OK: 200,
+  CREATED: 201,
+  NO_CONTENT: 204,
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  CONFLICT: 409,
+  INTERNAL_SERVER_ERROR: 500
+};
