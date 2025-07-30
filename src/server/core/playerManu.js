@@ -1,8 +1,8 @@
 import { input, colors } from '../utils/generalUtils.js';
 import startGame from './gameFlow.js';
 import Player from '../models/Player.js';
-import { sendAddRiddleRequest as addRiddle } from './services.js';
-import {handleSubmitTime} from './services.js';
+import { sendAddRiddleRequest as addRiddle } from '../services/services.js';
+import {handleSubmitTime} from '../services/services.js';
 
 
 export default async function playerManager(player) {

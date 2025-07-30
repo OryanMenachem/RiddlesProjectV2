@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import { Response } from '../server/utils/generalUtils.js';
 
 
 
@@ -25,13 +26,13 @@ export default async function sendHttpRequest(url, method, body = null) {
     }
 
     await new Promise(res => setTimeout(res, 1000));
-
+    let response = new Response();
     try {
         let res = await fetch(url, options);
-
-        let response;
+        
         try {
             response = await res.json();
+            return response;
         } catch (jsonError) {
             response.error = true;
             response.message = jsonError.message;
@@ -47,7 +48,7 @@ export default async function sendHttpRequest(url, method, body = null) {
             return response;
         }
 
-        return response;
+       
       } catch (error) {
           response.error = true;
           response.message = error.message;

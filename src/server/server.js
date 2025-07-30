@@ -25,7 +25,7 @@ function startListening() {
 }
 
 startListening();
-mongoConnection.open();    
+mongoConnection.open();
 
 
 

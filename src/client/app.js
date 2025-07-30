@@ -8,7 +8,7 @@ import mainMenuManager from '../server/core/mainManu.js';
 
 message.sayWelcome();
 
-message.displayInstructions();
+message.showInstructions();
 
 await mainMenuManager();
 

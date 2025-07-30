@@ -1,7 +1,7 @@
 import { input, colors } from '../utils/generalUtils.js';
 import play from './gameFlow.js';
 import Player from '../models/Player.js';
-import * as services from './services.js';
+import * as services from '../services/services.js';
 
 
 

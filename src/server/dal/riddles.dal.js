@@ -69,16 +69,18 @@ export async function getAllRiddles() {
 
 
 export async function getRiddlesByDifficulty(difficulty) {
-
+    
     const response = new Response();
     
     try {      
         const riddles = await riddlesCollection.find({"difficulty":difficulty}).toArray();
         response.message =  `Riddles with difficulty '${difficulty}' retrieved successfully.`; 
         response.content = riddles;
+        console.log(response); //
+        
         return response;
         
-      } catch(error) {
+      } catch(error) { 
         response.message =  error.message;
         response.error = true;
         return response;

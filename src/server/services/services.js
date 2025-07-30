@@ -2,9 +2,9 @@ import sendHttpRequest from '../../client/httpRequests.js';
 import { input, colors } from '../utils/generalUtils.js';
 import getId from '../utils/idGenerator.js';
 import Player from '../models/Player.js';
-import gameFlow from './gameFlow.js';
-import playerManager from './playerManu.js';
-import adminManager from './adminManu.js';
+import gameFlow from '../core/gameFlow.js';
+import playerManager from '../core/playerManu.js';
+import adminManager from '../core/adminManu.js';
 
 export async function handleGuest ()  {     
 
