@@ -3,15 +3,16 @@ import * as dal from '../dal/players.dal.js';
 import { Response } from '../utils/generalUtils.js';
 import { isInvalid, isTooShort } from '../utils/generalUtils.js';
 import { HTTP_STATUS } from '../utils/generalUtils.js';
-
+import {login} from '../auth/auth.js';
 
 
 export async function addPlayerController(req, res) {
-    const response = new Response();
+    let response = new Response();
 
     try {
         const { name, password } = req.body;
-        
+        const {token} = req.headers.authorization;
+
         if (isInvalid(name)) {
             response.error = true;
             response.message = "Name is required and must be a non-empty string.";
@@ -23,15 +24,16 @@ export async function addPlayerController(req, res) {
             return res.status(HTTP_STATUS.BAD_REQUEST).send(response);
         }
 
+        if (!token) {}
         const hashedPassword = await bcrypt.hash(password, 10);
-        const dalResponse = await dal.addPlayer(name, hashedPassword);
+        response = await dal.addPlayer(name, hashedPassword);
 
-        if (dalResponse.error) {
+        if (response.error) {
             const status = HTTP_STATUS.CONFLICT;
-            return res.status(status).send(dalResponse);
+            return res.status(status).send(response);
         }
 
-        return res.status(HTTP_STATUS.CREATED).send(dalResponse);
+        return res.status(HTTP_STATUS.CREATED).send(response);
 
     } catch (error) {
         response.error = true;
